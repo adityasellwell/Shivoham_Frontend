@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Outlet, useLocation, Navigate } from "react-router-dom";
-import { LayoutDashboard, BarChart3, MessageSquare, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, BarChart3, MessageSquare, LogOut, Menu, X, HelpCircle, Settings } from "lucide-react";
 
 export default function AdminLayout() {
    const token = localStorage.getItem("adminToken");
@@ -16,6 +16,8 @@ export default function AdminLayout() {
     { name: "Testimonials", href: "/admin/testimonials", icon: MessageSquare },
     { name: "Quotes", href: "/admin/quotes", icon: LayoutDashboard },
     { name: "Consultations", href: "/admin/consultations", icon: MessageSquare },
+    { name: "FAQs", href: "/admin/faqs", icon: HelpCircle },
+    { name: "Quote Config", href: "/admin/quote-config", icon: Settings },
   ];
 
   function handleLogout(){
@@ -72,7 +74,7 @@ export default function AdminLayout() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         {/* Mobile Header */}
         <div className="md:hidden bg-white border-b border-slate-200 p-4 flex items-center justify-between">
           <h1 className="text-lg font-bold text-slate-900">Admin Panel</h1>
@@ -81,7 +83,7 @@ export default function AdminLayout() {
           </button>
         </div>
         
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 overflow-y-auto min-h-0">
           <Outlet />
         </div>
       </div>

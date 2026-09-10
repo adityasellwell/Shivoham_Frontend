@@ -6,7 +6,6 @@ import { services } from '../data/servicesData';
 import api from '../config/api';
 
 export default function Header() {
-  // const [navItems,setNavItems] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -35,33 +34,11 @@ export default function Header() {
     setActiveDropdown(null);
   }, [location]);
 
-  // Handle client-side search logic
-  // useEffect(() => {
-  //   if (!searchQuery.trim()) {
-  //     setSearchResults([]);
-  //     return;
-  //   }
-
-  //   const query = searchQuery.toLowerCase();
-  //   const results = Object.values(services).filter(service =>
-  //     service.title.toLowerCase().includes(query) ||
-  //     service.shortDescription.toLowerCase().includes(query)
-  //   ).slice(0, 5);
-
-  //   setSearchResults(results);
-  // }, [searchQuery]);
-
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
-  // const getNavItems =async ()=>{
-  //   const {data} = await api.get("/navbar");
-  //   setNavItems(data.data);
-  // }
-
   const navItems = [
-    // { name: 'Home', path: '/' },
     {
       name: 'IPR Services',
       dropdown: 'ipr',
@@ -99,7 +76,6 @@ export default function Header() {
       ]
     },
     { name: 'About Us', path: '/about' },
-    { name: 'Blog', path: '/blog' },
     { name: 'FAQs', path: '/faq' },
     { name: 'Contact', path: '/contact' }
   ];
@@ -107,7 +83,7 @@ export default function Header() {
   return (
     <>
       {/* Top Header Bar */}
-      <div className="hidden lg:block bg-[#052E1F] text-white py-2 px-6 text-xs sm:text-sm transition-all border-b border-slate-800">
+      <div className="hidden lg:block bg-[#052E1F] dark:bg-black text-white py-2 px-6 text-xs sm:text-sm transition-all border-b border-slate-800 dark:border-zinc-800">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center font-sans space-y-2 sm:space-y-0">
           <div className="flex flex-col sm:flex-row sm:space-x-6 items-center space-y-1 sm:space-y-0">
             <span className="flex items-center text-slate-300">
@@ -120,7 +96,7 @@ export default function Header() {
             </span>
           </div>
           <div className="text-slate-400 sm:text-slate-300 text-center sm:text-right">
-            Dadar, Mumbai • India's Leading Professional Services Platform
+            Dadar East, Mumbai 400014 • India's Leading Professional Services Platform
           </div>
         </div>
       </div>
@@ -133,12 +109,8 @@ export default function Header() {
             <img
               src="/img/mainLogo.png"
               alt="Shivoham & Associates"
-              className="h-12 w-auto object-contain transition-transform group-hover:scale-105"
+              className="h-12 w-auto object-contain transition-transform group-hover:scale-105 rounded-md"
             />
-            {/* <div className="flex flex-col leading-none">
-              <span className="font-display font-black text-xl text-slate-900 dark:text-white tracking-tight">SHIVOHAM</span>
-              <span className="font-sans text-[10px] text-primary-600 dark:text-primary-400 tracking-wider font-semibold">LAW & ASSOCIATES</span>
-            </div> */}
           </Link>
 
           {/* Desktop Navigation */}
@@ -153,8 +125,8 @@ export default function Header() {
                 {item.dropdown ? (
                   <button
                     className={`px-4 py-2 text-sm font-semibold rounded-lg flex items-center transition duration-200 cursor-pointer ${activeDropdown === item.dropdown
-                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50/50 dark:bg-slate-800/50'
-                      : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
+                        ? 'text-primary-600 bg-primary-50'
+                        : 'text-slate-700 hover:text-slate-950 hover:bg-slate-50'
                       }`}
                   >
                     {item.name}
@@ -165,8 +137,8 @@ export default function Header() {
                     to={item.path}
                     className={({ isActive }) =>
                       `px-4 py-2 text-sm font-semibold rounded-lg transition duration-200 block ${isActive
-                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-slate-800/50 font-bold'
-                        : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-slate-800/30'
+                        ? 'text-primary-600 bg-primary-50 font-bold'
+                        : 'text-slate-700 hover:text-slate-950 hover:bg-slate-50'
                       }`
                     }
                   >
@@ -182,15 +154,15 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute left-0 mt-1 w-64 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-xl rounded-xl overflow-hidden z-50 p-2 grid gap-1"
+                      className="absolute left-0 mt-1 w-64 bg-white border border-slate-200 shadow-xl rounded-xl overflow-hidden z-50 p-2 grid gap-1"
                     >
                       {item.items.map((subItem, sIdx) => (
                         <Link
                           key={sIdx}
                           to={subItem.path}
-                          className="px-4 py-2.5 text-sm rounded-lg text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition duration-150 flex items-center font-medium"
+                          className="px-4 py-2.5 text-sm rounded-lg text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition duration-150 flex items-center font-medium"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 mr-2.5 transition-colors duration-150 hover:bg-primary-500"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-slate-300 mr-2.5 transition-colors duration-150 hover:bg-primary-500"></span>
                           {subItem.name}
                         </Link>
                       ))}
@@ -203,39 +175,47 @@ export default function Header() {
 
           {/* Action Area */}
           <div className="hidden lg:flex items-center space-x-3">
-            {/* Search Icon */}
-            {/* <button 
-              onClick={() => setIsSearchOpen(true)}
-              className="p-2.5 hover:bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full transition cursor-pointer"
-              title="Search Services"
+            {/* Dark Mode Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              className="w-10 h-10 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-xs cursor-pointer group"
             >
-              <Search className="w-5 h-5" />
-            </button> */}
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-amber-500 transition-transform group-hover:rotate-45" />
+              ) : (
+                <Moon className="w-5 h-5 text-slate-700 transition-transform group-hover:-rotate-12" />
+              )}
+            </button>
 
-            {/* CTA Button */}
+            {/* CTA Button with pulse glow and light sweep */}
             <Link
               to="/get-quote"
-              className="bg-linear-to-r from-primary-600 to-accent-600 hover:from-primary-700 hover:to-accent-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition duration-200 flex items-center gap-1.5 group cursor-pointer"
+              className="relative overflow-hidden bg-gradient-to-r from-[#d97706] via-[#f59e0b] to-[#16a34a] hover:from-[#b45309] hover:to-[#15803d] text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md hover:shadow-xl transition-all duration-300 flex items-center gap-1.5 group cursor-pointer cta-pulse-btn"
             >
-              Get a Quote
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <span className="cta-shimmer" />
+              <span className="relative z-10 flex items-center gap-1.5">
+                Get a Quote
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
+              </span>
             </Link>
           </div>
 
           {/* Mobile Buttons */}
           <div className="flex lg:hidden items-center space-x-2">
-            {/* <button
-              onClick={() => setIsSearchOpen(true)}
-              className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition"
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              className="p-2 text-slate-700 hover:bg-slate-100 rounded-full transition cursor-pointer"
             >
-              <Search className="w-5 h-5" />
-            </button> */}
-
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5 text-slate-700" />}
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition"
+              className="p-2 text-slate-800 hover:bg-slate-100 rounded-full transition"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? <X className="w-6 h-6 text-slate-800" /> : <Menu className="w-6 h-6 text-slate-800" />}
             </button>
           </div>
         </div>
@@ -248,7 +228,7 @@ export default function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25 }}
-              className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden max-h-[85vh] overflow-y-auto"
+              className="lg:hidden bg-white border-t border-slate-200 shadow-xl overflow-hidden max-h-[85vh] overflow-y-auto"
             >
               <div className="px-4 pt-3 pb-6 space-y-1">
                 {navItems.map((item, idx) => (
@@ -257,7 +237,7 @@ export default function Header() {
                       <div>
                         <button
                           onClick={() => setActiveDropdown(activeDropdown === item.dropdown ? null : item.dropdown)}
-                          className="w-full flex justify-between items-center py-2.5 px-3 text-base font-bold text-slate-800 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/30"
+                          className="w-full flex justify-between items-center py-2.5 px-3 text-base font-bold text-slate-800 rounded-lg hover:bg-slate-50"
                         >
                           {item.name}
                           <ChevronDown className={`w-5 h-5 text-slate-500 transition-transform ${activeDropdown === item.dropdown ? 'rotate-180' : ''}`} />
@@ -274,7 +254,7 @@ export default function Header() {
                                 <Link
                                   key={sIdx}
                                   to={subItem.path}
-                                  className="block py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition"
+                                  className="block py-2 text-sm text-slate-600 hover:text-primary-600 transition"
                                 >
                                   {subItem.name}
                                 </Link>
@@ -288,8 +268,8 @@ export default function Header() {
                         to={item.path}
                         className={({ isActive }) =>
                           `block py-2.5 px-3 text-base font-bold rounded-lg transition ${isActive
-                            ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-slate-800/40'
-                            : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/30'
+                            ? 'text-primary-600 bg-primary-50 font-bold'
+                            : 'text-slate-800 hover:bg-slate-50'
                           }`
                         }
                       >
@@ -299,14 +279,17 @@ export default function Header() {
                   </div>
                 ))}
 
-                {/* Mobile CTA */}
+                {/* Mobile CTA with animation */}
                 <div className="pt-4 px-3">
                   <Link
                     to="/get-quote"
-                    className="w-full text-center bg-linear-to-r from-primary-600 to-accent-600 hover:from-primary-700 hover:to-accent-700 text-white py-3 rounded-xl font-bold flex justify-center items-center gap-1.5 shadow-md"
+                    className="relative overflow-hidden w-full text-center bg-gradient-to-r from-[#d97706] via-[#f59e0b] to-[#16a34a] hover:from-[#b45309] hover:to-[#15803d] text-white py-3 rounded-xl font-bold flex justify-center items-center gap-1.5 shadow-md cta-pulse-btn"
                   >
-                    Get a Quote
-                    <ArrowRight className="w-4 h-4" />
+                    <span className="cta-shimmer" />
+                    <span className="relative z-10 flex items-center gap-1.5">
+                      Get a Quote
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -314,96 +297,6 @@ export default function Header() {
           )}
         </AnimatePresence>
       </header>
-
-      {/* Global Animated Search Modal */}
-      <AnimatePresence>
-        {isSearchOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/80 backdrop-blur-lg z-100 flex justify-center items-start pt-20 px-4 sm:pt-28"
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: -20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: -20 }}
-              className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden border border-slate-100 dark:border-slate-800"
-            >
-              {/* Search Header Input */}
-              <div className="p-5 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
-                <div className="flex items-center flex-1 mr-4">
-                  <Search className="w-6 h-6 text-slate-400 mr-3" />
-                  <input
-                    type="text"
-                    placeholder="Search for trademark, GST, company registration..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-transparent border-0 outline-none text-slate-800 dark:text-white text-lg font-medium placeholder-slate-400 focus:ring-0"
-                    autoFocus
-                  />
-                </div>
-                <button
-                  onClick={() => setIsSearchOpen(false)}
-                  className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-500 hover:text-slate-800 dark:hover:text-white transition"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Search Body Results */}
-              <div className="p-5 max-h-[60vh] overflow-y-auto bg-slate-50/50 dark:bg-slate-900/50">
-                {searchQuery.trim() === '' ? (
-                  <div className="text-center py-6">
-                    <p className="text-slate-500 dark:text-slate-400 font-semibold mb-2">Popular Searches</p>
-                    <div className="flex flex-wrap justify-center gap-2 mt-3">
-                      {['Trademark', 'GST', 'MSME Udyam', 'LLP', 'Private Limited'].map((pop, pIdx) => (
-                        <button
-                          key={pIdx}
-                          onClick={() => setSearchQuery(pop)}
-                          className="px-3.5 py-1.5 bg-white dark:bg-slate-800 hover:bg-primary-50 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition cursor-pointer"
-                        >
-                          {pop}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ) : searchResults.length > 0 ? (
-                  <div className="space-y-2">
-                    <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Matching Services</p>
-                    {searchResults.map((result) => (
-                      <Link
-                        key={result.id}
-                        to={`/services/${result.id}`}
-                        onClick={() => setIsSearchOpen(false)}
-                        className="p-3 bg-white dark:bg-slate-800 hover:bg-primary-50/50 dark:hover:bg-slate-800/80 border border-slate-200/40 dark:border-slate-700/40 hover:border-primary-300 dark:hover:border-primary-700 rounded-xl flex items-center justify-between transition group"
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 bg-primary-50 dark:bg-primary-950/50 rounded-lg text-primary-600 dark:text-primary-400">
-                            {result.categoryId === 'ipr' ? <Shield className="w-5 h-5" /> :
-                              result.categoryId === 'company-formation' ? <Briefcase className="w-5 h-5" /> :
-                                <FileCheck className="w-5 h-5" />}
-                          </div>
-                          <div>
-                            <p className="font-bold text-slate-800 dark:text-slate-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">{result.title}</p>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">{result.shortDescription}</p>
-                          </div>
-                        </div>
-                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition transform group-hover:translate-x-1" />
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <p className="text-slate-500 dark:text-slate-400 font-semibold">No services found for "{searchQuery}"</p>
-                    <p className="text-xs text-slate-400 mt-1">Try searching with other terms like "trademark", "patent", "GST", etc.</p>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

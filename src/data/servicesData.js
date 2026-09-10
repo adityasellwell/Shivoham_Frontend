@@ -35,11 +35,10 @@ export const services = {
       'Provides protection for 10 years and can be renewed indefinitely'
     ],
     documents: [
-      'Logo artwork / Brand name string copy',
-      'Signed authorization form (Form TM-48)',
-      'Identity Proof of applicant (PAN, Aadhaar Card)',
-      'Address Proof (Electricity bill, Rent agreement)',
-      'Proof of Brand Usage (if claiming prior use, e.g., invoices, website links)'
+      'Brand Name /logo',
+      'Applicant Name , Email and Contact Details',
+      'MSME Certificate / Startup certificate',
+      'GST certificate'
     ],
     process: [
       { step: 1, title: 'Trademark Search', desc: 'Comprehensive search across all 45 classes to ensure your brand name/logo is unique and registrable.' },
@@ -473,8 +472,10 @@ export const services = {
     ],
     process: [
       { step: 1, title: 'Aaple Sarkar Filing', desc: 'Create applicant profile on the Maharashtra Aaple Sarkar portal.' },
-      { step: 2, title: 'Application Submission', desc: 'Fill establishment details: employee counts, business nature, name board.',
-        note: 'Establishments with < 10 employees receive Intimation Receipt, while > 10 employees receive regular License.' },
+      {
+        step: 2, title: 'Application Submission', desc: 'Fill establishment details: employee counts, business nature, name board.',
+        note: 'Establishments with < 10 employees receive Intimation Receipt, while > 10 employees receive regular License.'
+      },
       { step: 3, title: 'Fees Payment', desc: 'Pay state government processing fees.' },
       { step: 4, title: 'License Download', desc: 'Upon verification of the Marathi sign board and proofs, download the approved license.' }
     ],

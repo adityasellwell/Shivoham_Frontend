@@ -15,6 +15,7 @@ import {
 import { categories } from "../data/servicesData";
 import api from "../config/api";
 import brands from "../utils/brandsImages";
+import TestimonialSlider from "../components/TestimonialSlider";
 
 const heroSlides = [
   {
@@ -165,7 +166,7 @@ export default function Home() {
   return (
     <div className="font-sans overflow-hidden">
       {/* Premium Hero Section */}
-      <section className="relative bg-linear-to-br from-[#F4C430] via-[#FFB300] to-[#FF9933] dark:bg-black text-[#0B4619] pt-20 pb-11 px-4 sm:px-6 lg:px-8 flex items-center min-h-[75vh]">
+      <section className="relative bg-linear-to-br from-[#F4C430] via-[#FFB300] to-[#FF9933] text-[#0B4619] pt-20 pb-11 px-4 sm:px-6 lg:px-8 flex items-center min-h-[75vh]">
         {/* Animated Background Gradients */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
@@ -227,7 +228,7 @@ export default function Home() {
                     {heroSlides[currentSlide].suffix}
                   </h1>
 
-                  <p className="text-base sm:text-lg text-[#0B4619]/90 max-w-3xl mx-auto leading-relaxed font-medium px-4">
+                  <p className="text-base sm:text-lg text-[#0B4619]/90 max-w-3xl mx-auto leading-relaxed font-semibold px-4">
                     {heroSlides[currentSlide].desc}
                   </p>
                 </motion.div>
@@ -432,78 +433,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      {testimonials.length > 0 && (
-        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950/40 relative">
-          <div className="max-w-4xl mx-auto text-center space-y-12">
-            <div className="space-y-4">
-              <MessageSquare className="w-12 h-12 text-primary-500 mx-auto" />
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
-                Client Success Stories
-              </h2>
-            </div>
-
-            <div className="relative min-h-62.5 flex items-center justify-center">
-              {testimonials.length > 0 ? (
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentTestimonial}
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -50 }}
-                    transition={{ duration: 0.3 }}
-                    className="bg-white dark:bg-slate-900 p-8 sm:p-12 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-lg space-y-6"
-                  >
-                    <p className="text-slate-600 dark:text-slate-300 font-sans text-base sm:text-lg italic leading-relaxed">
-                      "{testimonials[currentTestimonial]?.content}"
-                    </p>
-
-                    <div className="flex items-center justify-center space-x-4">
-                      {testimonials[currentTestimonial]?.image && (
-                        <img
-                          src={testimonials[currentTestimonial].image}
-                          alt={testimonials[currentTestimonial].name}
-                          className="w-12 h-12 rounded-full object-cover border-2 border-primary-500/20"
-                        />
-                      )}
-                      <div className="text-left leading-tight">
-                        <h4 className="font-bold text-slate-900 dark:text-white text-base">
-                          {testimonials[currentTestimonial]?.name}
-                        </h4>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                          {testimonials[currentTestimonial]?.designation}
-                          {testimonials[currentTestimonial]?.company
-                            ? `, ${testimonials[currentTestimonial].company}`
-                            : ""}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              ) : (
-                <div className="text-slate-500">
-                  No testimonials available at the moment.
-                </div>
-              )}
-            </div>
-
-            {/* Slider Dots Indicator */}
-            <div className="flex justify-center space-x-2">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentTestimonial(idx)}
-                  className={`w-3 h-3 rounded-full transition-colors duration-300 cursor-pointer ${
-                    currentTestimonial === idx
-                      ? "bg-primary-500"
-                      : "bg-slate-300 dark:bg-slate-800"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Testimonial Section with Google Reviews Branding */}
+      <TestimonialSlider testimonials={testimonials} title="Client Success Stories" />
 
       {/* Premium Brand logo section */}
       <section className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden border-y border-slate-100 dark:border-slate-800">

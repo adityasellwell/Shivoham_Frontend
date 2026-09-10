@@ -17,6 +17,10 @@ import AdminQuotes from './pages/admin/AdminQuotes';
 import AdminConsultations from './pages/admin/AdminConsultations';
 import SearchResults from './pages/SearchResults';
 import AdminLogin from './pages/admin/AdminLogin';
+import AdminFAQ from './pages/admin/AdminFAQ';
+import AdminQuoteConfig from './pages/admin/AdminQuoteConfig';
+import Legal from './pages/Legal';
+
 
 // Scroll to top helper on route transition
 function ScrollToTop() {
@@ -79,6 +83,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <ScrollToTop />
+
       {!pathname.startsWith("/admin") && <Header />}
       <main className="grow">
         <Routes>
@@ -90,6 +95,13 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/services/:serviceId" element={<ServiceDetail />} />
           <Route path='/search-result' element={<SearchResults/>}/>
+          <Route path="/disclaimer" element={<Legal defaultTab="disclaimer" />} />
+          <Route path="/privacy-policy" element={<Legal defaultTab="privacy" />} />
+          <Route path="/terms-and-conditions" element={<Legal defaultTab="terms" />} />
+          <Route path="/refund-policy" element={<Legal defaultTab="refund" />} />
+          <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
+          <Route path="/terms" element={<Navigate to="/terms-and-conditions" replace />} />
+          <Route path="/refund" element={<Navigate to="/refund-policy" replace />} />
 
           {/* Admin Routes */}
           <Route path='/admin/login' element={<AdminLogin/>}  />
@@ -99,6 +111,8 @@ export default function App() {
             <Route path="testimonials" element={<AdminTestimonials />} />
             <Route path="quotes" element={<AdminQuotes />} />
             <Route path="consultations" element={<AdminConsultations />} />
+            <Route path="faqs" element={<AdminFAQ />} />
+            <Route path="quote-config" element={<AdminQuoteConfig />} />
           </Route>
 
           {/* Legacy PHP page redirect routes */}
