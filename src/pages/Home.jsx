@@ -16,6 +16,7 @@ import { categories } from "../data/servicesData";
 import api from "../config/api";
 import brands from "../utils/brandsImages";
 import TestimonialSlider from "../components/TestimonialSlider";
+import SEO from "../components/SEO";
 
 const heroSlides = [
   {
@@ -165,6 +166,31 @@ export default function Home() {
 
   return (
     <div className="font-sans overflow-hidden">
+      {/* SEO Metadata & LegalService Schema */}
+      <SEO
+        title="Shivoham & Associates | Premium IPR & Legal Advisory Services in Dadar, Mumbai"
+        description="India's trusted legal and IPR consultancy firm in Dadar East, Mumbai. Expert Trademark, Copyright, Patent, Industrial Design, Company Incorporation, and GST filing services."
+        canonicalUrl="https://shivoham.biz"
+        schemas={{
+          '@type': 'LegalService',
+          '@id': 'https://shivoham.biz#organization',
+          name: 'Shivoham & Associates',
+          url: 'https://shivoham.biz',
+          logo: 'https://shivoham.biz/img/mainLogo.png',
+          telephone: '+919137282042',
+          email: 'diptish@shivoham.biz',
+          priceRange: '₹₹',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Ground Floor, Parasmani Commercial Complex, Flignite',
+            addressLocality: 'Dadar East, Mumbai',
+            addressRegion: 'Maharashtra',
+            postalCode: '400014',
+            addressCountry: 'IN'
+          }
+        }}
+      />
+
       {/* Premium Hero Section */}
       <section className="relative bg-linear-to-br from-[#F4C430] via-[#FFB300] to-[#FF9933] text-[#0B4619] pt-20 pb-11 px-4 sm:px-6 lg:px-8 flex items-center min-h-[75vh]">
         {/* Animated Background Gradients */}
@@ -330,7 +356,7 @@ export default function Home() {
                 <div className="pt-8">
                   {cat.id === "ipr" ? (
                     <Link
-                      to="/services/trademark"
+                      to="/legal-services/trademark-registration-in-mumbai"
                       className="text-primary-600 dark:text-primary-400 font-extrabold text-sm flex items-center gap-1 hover:gap-2 transition-all group cursor-pointer"
                     >
                       Explore IPR Services
@@ -338,7 +364,7 @@ export default function Home() {
                     </Link>
                   ) : cat.id === "company-formation" ? (
                     <Link
-                      to="/services/private-limited"
+                      to="/business-services/company-formation-in-mumbai"
                       className="text-primary-600 dark:text-primary-400 font-extrabold text-sm flex items-center gap-1 hover:gap-2 transition-all group cursor-pointer"
                     >
                       Explore Formations

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, CheckCircle2, User, FileText, Send, Calendar, Lock } from 'lucide-react';
 import LegalTermsModal from '../components/LegalTermsModal';
 import api from '../config/api';
+import SEO from '../components/SEO';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
@@ -73,6 +74,33 @@ export default function Contact() {
 
   return (
     <div className="font-sans bg-slate-50 dark:bg-slate-950/20 transition-all">
+      {/* SEO Metadata & ContactPage Schema */}
+      <SEO
+        title="Contact Us | Legal Advisors in Dadar East, Mumbai | Shivoham & Associates"
+        description="Schedule a legal consultation or drop an inquiry with Shivoham & Associates at Dadar East, Mumbai. Phone: +91 9137282042 | Email: diptish@shivoham.biz"
+        canonicalUrl="https://shivoham.biz/contact"
+        schemas={{
+          '@type': 'ContactPage',
+          '@id': 'https://shivoham.biz/contact#page',
+          name: 'Contact Shivoham & Associates',
+          url: 'https://shivoham.biz/contact',
+          mainEntity: {
+            '@type': 'LegalService',
+            name: 'Shivoham & Associates',
+            telephone: '+919137282042',
+            email: 'diptish@shivoham.biz',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: 'Ground Floor, Parasmani Commercial Complex, Flignite',
+              addressLocality: 'Dadar East, Mumbai',
+              addressRegion: 'Maharashtra',
+              postalCode: '400014',
+              addressCountry: 'IN'
+            }
+          }
+        }}
+      />
+
       {/* Title Header Banner */}
       <section className="bg-gradient-to-br from-[#F4C430] via-[#FFB300] to-[#FF9933] text-[#0B4619] py-20 px-4 text-center relative overflow-hidden border-b border-[#0B4619]/10">
         <div className="absolute right-0 top-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>

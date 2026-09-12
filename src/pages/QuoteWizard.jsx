@@ -5,6 +5,7 @@ import { Shield, Briefcase, FileCheck, Check, ArrowRight, ArrowLeft, Mail, Phone
 import QuoteIcon from '../components/QuoteIcon';
 import LegalTermsModal from '../components/LegalTermsModal';
 import api from '../config/api';
+import SEO from '../components/SEO';
 
 export default function QuoteWizard() {
   const [step, setStep] = useState(1);
@@ -149,6 +150,13 @@ export default function QuoteWizard() {
 
   return (
     <div className="font-sans bg-slate-50 dark:bg-slate-950/20 py-16 transition-all min-h-[80vh] flex flex-col justify-center items-center px-4">
+      {/* SEO Metadata */}
+      <SEO
+        title="Get a Quote | Professional Legal & IPR Fees Estimator | Shivoham & Associates"
+        description="Calculate estimated government and professional filing fees for Trademark, Patent, Copyright, Industrial Design, and Company Incorporation in Mumbai."
+        canonicalUrl="https://shivoham.biz/quote"
+      />
+
       <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800/80 rounded-3xl shadow-xl overflow-hidden p-8 sm:p-10">
 
         {/* Progress Bar */}

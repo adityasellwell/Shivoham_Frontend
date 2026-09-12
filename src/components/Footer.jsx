@@ -6,10 +6,10 @@ import { FaLinkedin } from "react-icons/fa";
 /* ================= DATA OBJECTS ================= */
 
 const services = [
-  { name: "Trademark Registration", link: "/services/trademark", icon: Shield },
-  { name: "Copyright Registration", link: "/services/copyright", icon: Shield },
-  { name: "Patent & Design Filings", link: "/services/patent", icon: Shield },
-  { name: "fssai Registration", link: "/services/fssai-health-fire", icon: FileCheck },
+  { name: "Trademark Registration", link: "/legal-services/trademark-registration-in-mumbai", icon: Shield },
+  { name: "Copyright Registration", link: "/legal-services/copyright-registration-in-mumbai", icon: Shield },
+  { name: "Patent & Design Filings", link: "/legal-services/patent-registration-in-mumbai", icon: Shield },
+  { name: "FSSAI (Food License)", link: "/business-registration/fssai-food-license-in-mumbai", icon: FileCheck },
 ];
 
 const legalLinks = [

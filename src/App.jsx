@@ -20,6 +20,9 @@ import AdminLogin from './pages/admin/AdminLogin';
 import AdminFAQ from './pages/admin/AdminFAQ';
 import AdminQuoteConfig from './pages/admin/AdminQuoteConfig';
 import Legal from './pages/Legal';
+import WhichIPProtection from './pages/WhichIPProtection';
+import WhichBusinessStructure from './pages/WhichBusinessStructure';
+import WhichRegistrationsNeed from './pages/WhichRegistrationsNeed';
 
 
 // Scroll to top helper on route transition
@@ -46,7 +49,7 @@ function LegacyRedirect() {
     '/company-formation.php': '/services/private-limited',
     '/msme-service-in-dadar.php': '/services/msme-udyam',
     '/gumasta-service-in-dadar.php': '/services/shop-act-gumasta',
-    '/ipr-service-in-dadar.php': '/services/trademark',
+    '/ipr-service-in-dadar.php': '/services/which-ip-protection-do-i-need',
     '/trademark-services-in-dadar.php': '/services/trademark',
     '/copyright-services-in-dadar.php': '/services/copyright',
     '/patents-services-in-dadar.php': '/services/patent',
@@ -93,6 +96,79 @@ export default function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/get-quote" element={<QuoteWizard />} />
           <Route path="/blog" element={<Blog />} />
+          {/* Target SEO URL Routes */}
+          {/* 1. IPR Services */}
+          <Route path="/legal-services/trademark-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/legal-services/copyright-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/legal-services/patent-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/legal-services/design-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/legal-services/legal-advice-agreements-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/legal-services/ipr-services-in-mumbai" element={<WhichIPProtection />} />
+
+          {/* 2. Company Formation */}
+          <Route path="/business-services/which-business-structure-should-i-choose" element={<WhichBusinessStructure />} />
+          <Route path="/which-business-structure-should-i-choose" element={<Navigate to="/business-services/which-business-structure-should-i-choose" replace />} />
+          <Route path="/which-business-structure" element={<Navigate to="/business-services/which-business-structure-should-i-choose" replace />} />
+          <Route path="/services/which-business-structure-should-i-choose" element={<Navigate to="/business-services/which-business-structure-should-i-choose" replace />} />
+          <Route path="/services/company-formation" element={<Navigate to="/business-services/which-business-structure-should-i-choose" replace />} />
+
+          <Route path="/business-services/sole-proprietorship-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-services/partnership-firm-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-services/opc-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-services/llp-incorporation-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-services/company-formation-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-services/ngo-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-services/trust-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-services/ngo-trust-registration-in-mumbai" element={<ServiceDetail />} />
+
+          {/* 3. Licenses & Compliance */}
+          <Route path="/business-registration/which-registrations-does-my-business-need" element={<WhichRegistrationsNeed />} />
+          <Route path="/business-registration/which-registrations" element={<Navigate to="/business-registration/which-registrations-does-my-business-need" replace />} />
+          <Route path="/services/which-registrations-does-my-business-need" element={<Navigate to="/business-registration/which-registrations-does-my-business-need" replace />} />
+          <Route path="/business-registration/msme-udyam-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/gst-registration-filing-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/dsc-digital-signature-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/import-export-code-iec-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/iec-code-registration-in-mumbai" element={<Navigate to="/business-registration/import-export-code-iec-in-mumbai" replace />} />
+          <Route path="/business-registration/gumasta-license-registration-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/fssai-food-license-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/iso-certification-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/apeda-registration-in-mumbai" element={<Navigate to="/business-registration/which-registrations-does-my-business-need" replace />} />
+          <Route path="/business-registration/professional-tax-pt-in-mumbai" element={<Navigate to="/business-registration/which-registrations-does-my-business-need" replace />} />
+
+          {/* Automatic Redirects from old /services/ paths to target SEO paths */}
+          <Route path="/services/trademark" element={<Navigate to="/legal-services/trademark-registration-in-mumbai" replace />} />
+          <Route path="/services/copyright" element={<Navigate to="/legal-services/copyright-registration-in-mumbai" replace />} />
+          <Route path="/services/patent" element={<Navigate to="/legal-services/patent-registration-in-mumbai" replace />} />
+          <Route path="/services/design" element={<Navigate to="/legal-services/design-registration-in-mumbai" replace />} />
+          <Route path="/services/legal-advice" element={<Navigate to="/legal-services/legal-advice-agreements-in-mumbai" replace />} />
+
+          <Route path="/services/sole-proprietor" element={<Navigate to="/business-services/sole-proprietorship-registration-in-mumbai" replace />} />
+          <Route path="/services/partnership-firm" element={<Navigate to="/business-services/partnership-firm-registration-in-mumbai" replace />} />
+          <Route path="/services/partnership" element={<Navigate to="/business-services/partnership-firm-registration-in-mumbai" replace />} />
+          <Route path="/services/opc" element={<Navigate to="/business-services/opc-registration-in-mumbai" replace />} />
+          <Route path="/services/llp" element={<Navigate to="/business-services/llp-incorporation-in-mumbai" replace />} />
+          <Route path="/services/private-limited" element={<Navigate to="/business-services/company-formation-in-mumbai" replace />} />
+          <Route path="/services/ngo" element={<Navigate to="/business-services/ngo-registration-in-mumbai" replace />} />
+          <Route path="/services/trust" element={<Navigate to="/business-services/trust-registration-in-mumbai" replace />} />
+
+          <Route path="/services/msme-udyam" element={<Navigate to="/business-registration/msme-udyam-registration-in-mumbai" replace />} />
+          <Route path="/services/msme" element={<Navigate to="/business-registration/msme-udyam-registration-in-mumbai" replace />} />
+          <Route path="/services/gst" element={<Navigate to="/business-registration/gst-registration-filing-in-mumbai" replace />} />
+          <Route path="/services/dsc" element={<Navigate to="/business-registration/dsc-digital-signature-in-mumbai" replace />} />
+          <Route path="/services/iec" element={<Navigate to="/business-registration/iec-code-registration-in-mumbai" replace />} />
+          <Route path="/services/shop-act-gumasta" element={<Navigate to="/business-registration/gumasta-license-registration-in-mumbai" replace />} />
+          <Route path="/services/shop-act" element={<Navigate to="/business-registration/gumasta-license-registration-in-mumbai" replace />} />
+          <Route path="/services/gumasta" element={<Navigate to="/business-registration/gumasta-license-registration-in-mumbai" replace />} />
+          <Route path="/services/fssai-health-fire" element={<Navigate to="/business-registration/fssai-food-license-in-mumbai" replace />} />
+          <Route path="/services/iso-ce-bis" element={<Navigate to="/business-registration/iso-certification-in-mumbai" replace />} />
+
+          <Route path="/services/which-ip-protection-do-i-need" element={<Navigate to="/legal-services/ipr-services-in-mumbai" replace />} />
+          <Route path="/which-ip-protection" element={<Navigate to="/legal-services/ipr-services-in-mumbai" replace />} />
+          <Route path="/which-ip-protection-do-i-need" element={<Navigate to="/legal-services/ipr-services-in-mumbai" replace />} />
+          <Route path="/services/ipr" element={<Navigate to="/legal-services/ipr-services-in-mumbai" replace />} />
+
+          {/* Catch-all for other services */}
           <Route path="/services/:serviceId" element={<ServiceDetail />} />
           <Route path='/search-result' element={<SearchResults/>}/>
           <Route path="/disclaimer" element={<Legal defaultTab="disclaimer" />} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Search, ArrowRight, Shield, Briefcase, FileCheck, PhoneCall, ChevronDown } from 'lucide-react';
+import { Menu, X, Sun, Moon, Search, ArrowRight, Shield, Briefcase, FileCheck, PhoneCall, ChevronDown, Sparkles } from 'lucide-react';
 import { services } from '../data/servicesData';
 import api from '../config/api';
 
@@ -43,49 +43,64 @@ export default function Header() {
       name: 'IPR Services',
       dropdown: 'ipr',
       items: [
-        { name: 'Trademarks Registration', path: '/services/trademark' },
-        { name: 'Copyright Registration', path: '/services/copyright' },
-        { name: 'Patent Filing', path: '/services/patent' },
-        { name: 'Industrial Design', path: '/services/design' },
-        { name: 'Legal Advice & Contracts', path: '/services/legal-advice' }
+        { 
+          name: 'Which IP Protection Do I Need?', 
+          path: '/legal-services/ipr-services-in-mumbai', 
+          isFeatured: true 
+        },
+        { name: 'Trademarks Registration', path: '/legal-services/trademark-registration-in-mumbai' },
+        { name: 'Copyright Registration', path: '/legal-services/copyright-registration-in-mumbai' },
+        { name: 'Patent Filing', path: '/legal-services/patent-registration-in-mumbai' },
+        { name: 'Industrial Design', path: '/legal-services/design-registration-in-mumbai' },
+        { name: 'Legal Advice & Contracts', path: '/legal-services/legal-advice-agreements-in-mumbai' }
       ]
     },
     {
       name: 'Company Formation',
       dropdown: 'formation',
       items: [
-        { name: 'Sole Proprietorship', path: '/services/sole-proprietor' },
-        { name: 'Partnership Firm', path: '/services/partnership-firm' },
-        { name: 'One Person Company (OPC)', path: '/services/opc' },
-        { name: 'LLP Incorporation', path: '/services/llp' },
-        { name: 'Private Limited Company', path: '/services/private-limited' },
-        { name: 'NGO / Trust', path: '/services/ngo' }
+        { 
+          name: 'Which Business Structure Should I Choose?', 
+          path: '/business-services/which-business-structure-should-i-choose', 
+          isFeatured: true 
+        },
+        { name: 'Sole Proprietorship', path: '/business-services/sole-proprietorship-registration-in-mumbai' },
+        { name: 'Partnership Firm', path: '/business-services/partnership-firm-registration-in-mumbai' },
+        { name: 'One Person Company (OPC)', path: '/business-services/opc-registration-in-mumbai' },
+        { name: 'LLP Incorporation', path: '/business-services/llp-incorporation-in-mumbai' },
+        { name: 'Private Limited Company', path: '/business-services/company-formation-in-mumbai' },
+        { name: 'NGO', path: '/business-services/ngo-registration-in-mumbai' },
+        { name: 'Trust', path: '/business-services/trust-registration-in-mumbai' }
       ]
     },
     {
       name: 'Licenses',
       dropdown: 'licenses',
       items: [
-        { name: 'MSME Udyam Registration', path: '/services/msme-udyam' },
-        { name: 'GST Filing & Registration', path: '/services/gst' },
-        { name: 'Digital Signature (DSC)', path: '/services/dsc' },
-        { name: 'Import Export Code (IEC)', path: '/services/iec' },
-        { name: 'Shop Act / Gumasta', path: '/services/shop-act-gumasta' },
-        { name: 'FSSAI / Health / Fire', path: '/services/fssai-health-fire' },
-        { name: 'ISO / CE / BIS Certs', path: '/services/iso-ce-bis' }
+        { 
+          name: 'Which Registrations Do You Actually Need?', 
+          path: '/business-registration/which-registrations-does-my-business-need', 
+          isFeatured: true 
+        },
+        { name: 'MSME / Udyam Registration', path: '/business-registration/msme-udyam-registration-in-mumbai' },
+        { name: 'Gumasta / Shop Act License', path: '/business-registration/gumasta-license-registration-in-mumbai' },
+        { name: 'Import Export Code (IEC)', path: '/business-registration/import-export-code-iec-in-mumbai' },
+        { name: 'GST Registration & Filing', path: '/business-registration/gst-registration-filing-in-mumbai' },
+        { name: 'FSSAI (Food License)', path: '/business-registration/fssai-food-license-in-mumbai' },
+        { name: 'Digital Signature (DSC)', path: '/business-registration/dsc-digital-signature-in-mumbai' },
+        { name: 'ISO Certification', path: '/business-registration/iso-certification-in-mumbai' }
       ]
     },
     { name: 'About Us', path: '/about' },
-    { name: 'FAQs', path: '/faq' },
     { name: 'Contact', path: '/contact' }
   ];
 
   return (
     <>
-      {/* Top Header Bar */}
-      <div className="hidden lg:block bg-[#052E1F] dark:bg-black text-white py-2 px-6 text-xs sm:text-sm transition-all border-b border-slate-800 dark:border-zinc-800">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center font-sans space-y-2 sm:space-y-0">
-          <div className="flex flex-col sm:flex-row sm:space-x-6 items-center space-y-1 sm:space-y-0">
+      {/* Top Notification / Utility Bar */}
+      <div className="bg-slate-900 text-white text-xs py-2 px-4 border-b border-slate-800 transition-colors">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
             <span className="flex items-center text-slate-300">
               <PhoneCall className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary-400" />
               Call us: <a href="tel:+919137282042" className="hover:text-primary-400 transition ml-1 font-semibold">+91 9137282042</a>
@@ -154,16 +169,33 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute left-0 mt-1 w-64 bg-white border border-slate-200 shadow-xl rounded-xl overflow-hidden z-50 p-2 grid gap-1"
+                      className="absolute left-0 mt-1 w-72 bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden z-50 p-2.5 grid gap-1"
                     >
                       {item.items.map((subItem, sIdx) => (
                         <Link
                           key={sIdx}
                           to={subItem.path}
-                          className="px-4 py-2.5 text-sm rounded-lg text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition duration-150 flex items-center font-medium"
+                          className={`px-3 py-2 text-sm rounded-xl transition duration-150 flex items-center justify-between font-medium ${
+                            subItem.isFeatured
+                              ? 'bg-amber-50/90 dark:bg-amber-950/40 text-amber-950 dark:text-amber-100 hover:bg-amber-100/80 dark:hover:bg-amber-900/50 border border-amber-200/80 dark:border-amber-800/60 mb-1.5 shadow-xs'
+                              : 'text-slate-700 dark:text-slate-200 hover:text-primary-600 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                          }`}
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-slate-300 mr-2.5 transition-colors duration-150 hover:bg-primary-500"></span>
-                          {subItem.name}
+                          <div className="flex items-center gap-2.5 min-w-0 pr-1">
+                            {subItem.isFeatured ? (
+                              <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+                            ) : (
+                              <span className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-0.5 mr-1 shrink-0 transition-colors duration-150"></span>
+                            )}
+                            <span className={`${subItem.isFeatured ? 'text-xs sm:text-sm font-bold leading-snug text-amber-950' : 'text-xs sm:text-sm font-semibold'}`}>
+                              {subItem.name}
+                            </span>
+                          </div>
+                          {subItem.isFeatured && (
+                            <span className="text-[10px] uppercase font-black px-1.5 py-0.5 rounded bg-amber-200 text-amber-900 tracking-wider shrink-0 shadow-2xs">
+                              GUIDE
+                            </span>
+                          )}
                         </Link>
                       ))}
                     </motion.div>
@@ -254,9 +286,14 @@ export default function Header() {
                                 <Link
                                   key={sIdx}
                                   to={subItem.path}
-                                  className="block py-2 text-sm text-slate-600 hover:text-primary-600 transition"
+                                  className={`block py-2 text-sm transition ${
+                                    subItem.isFeatured
+                                      ? 'text-amber-800 dark:text-amber-300 font-bold flex items-center gap-2 bg-amber-50 dark:bg-amber-950/40 px-3 py-2 rounded-lg border border-amber-200/60 my-1'
+                                      : 'text-slate-600 dark:text-slate-400 hover:text-primary-600'
+                                  }`}
                                 >
-                                  {subItem.name}
+                                  {subItem.isFeatured && <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />}
+                                  <span>{subItem.name}</span>
                                 </Link>
                               ))}
                             </motion.div>

@@ -22,6 +22,7 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import TestimonialSlider from '../components/TestimonialSlider';
+import SEO from '../components/SEO';
 
 export default function About() {
   const [activePrinciple, setActivePrinciple] = useState(0);
@@ -140,6 +141,13 @@ export default function About() {
 
   return (
     <div className="font-sans bg-slate-50 dark:bg-slate-950/40 transition-all">
+      {/* SEO Metadata */}
+      <SEO
+        title="About Us | Legal & IPR Experts in Dadar, Mumbai | Shivoham & Associates"
+        description="Learn about Shivoham & Associates, a premier legal consultancy in Dadar East, Mumbai specializing in Intellectual Property, corporate governance, and statutory compliance."
+        canonicalUrl="https://shivoham.biz/about"
+      />
+
       {/* Title Header Banner */}
       <section className="bg-gradient-to-br from-[#F4C430] via-[#FFB300] to-[#FF9933] text-[#0B4619] py-20 px-4 text-center relative overflow-hidden border-b border-[#0B4619]/10">
         <div className="absolute right-0 top-0 w-64 h-64 bg-white/20 rounded-full blur-3xl pointer-events-none"></div>
