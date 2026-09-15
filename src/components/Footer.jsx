@@ -7,8 +7,8 @@ import { FaLinkedin } from "react-icons/fa";
 
 const services = [
   { name: "Trademark Registration", link: "/legal-services/trademark-registration-in-mumbai", icon: Shield },
-  { name: "Copyright Registration", link: "/legal-services/copyright-registration-in-mumbai", icon: Shield },
-  { name: "Patent & Design Filings", link: "/legal-services/patent-registration-in-mumbai", icon: Shield },
+  { name: "Which Registrations Need?", link: "/business-registration/which-registrations-does-my-business-need", icon: FileCheck },
+  { name: "Compliance Calendar (MH)", link: "/compliance-calendar", icon: FileText },
   { name: "FSSAI (Food License)", link: "/business-registration/fssai-food-license-in-mumbai", icon: FileCheck },
 ];
 

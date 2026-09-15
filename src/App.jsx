@@ -23,6 +23,7 @@ import Legal from './pages/Legal';
 import WhichIPProtection from './pages/WhichIPProtection';
 import WhichBusinessStructure from './pages/WhichBusinessStructure';
 import WhichRegistrationsNeed from './pages/WhichRegistrationsNeed';
+import ComplianceCalendar from './pages/ComplianceCalendar';
 
 
 // Scroll to top helper on route transition
@@ -82,7 +83,7 @@ function LegacyRedirect() {
 
 export default function App() {
   const { pathname } = useLocation();
-  
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <ScrollToTop />
@@ -133,8 +134,15 @@ export default function App() {
           <Route path="/business-registration/gumasta-license-registration-in-mumbai" element={<ServiceDetail />} />
           <Route path="/business-registration/fssai-food-license-in-mumbai" element={<ServiceDetail />} />
           <Route path="/business-registration/iso-certification-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/professional-tax-ptec-ptrc-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/professional-tax-pt-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/bis-certification-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/ce-marking-in-mumbai" element={<ServiceDetail />} />
+          <Route path="/business-registration/dpiit-startup-recognition-in-mumbai" element={<ServiceDetail />} />
           <Route path="/business-registration/apeda-registration-in-mumbai" element={<Navigate to="/business-registration/which-registrations-does-my-business-need" replace />} />
-          <Route path="/business-registration/professional-tax-pt-in-mumbai" element={<Navigate to="/business-registration/which-registrations-does-my-business-need" replace />} />
+          <Route path="/compliance-calendar" element={<ComplianceCalendar />} />
+          <Route path="/compliance-calendar-mumbai" element={<Navigate to="/compliance-calendar" replace />} />
+          <Route path="/business-compliance-calendar" element={<Navigate to="/compliance-calendar" replace />} />
 
           {/* Automatic Redirects from old /services/ paths to target SEO paths */}
           <Route path="/services/trademark" element={<Navigate to="/legal-services/trademark-registration-in-mumbai" replace />} />
@@ -170,7 +178,7 @@ export default function App() {
 
           {/* Catch-all for other services */}
           <Route path="/services/:serviceId" element={<ServiceDetail />} />
-          <Route path='/search-result' element={<SearchResults/>}/>
+          <Route path='/search-result' element={<SearchResults />} />
           <Route path="/disclaimer" element={<Legal defaultTab="disclaimer" />} />
           <Route path="/privacy-policy" element={<Legal defaultTab="privacy" />} />
           <Route path="/terms-and-conditions" element={<Legal defaultTab="terms" />} />
@@ -180,7 +188,7 @@ export default function App() {
           <Route path="/refund" element={<Navigate to="/refund-policy" replace />} />
 
           {/* Admin Routes */}
-          <Route path='/admin/login' element={<AdminLogin/>}  />
+          <Route path='/admin/login' element={<AdminLogin />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="/admin/stats" replace />} />
             <Route path="stats" element={<AdminStats />} />

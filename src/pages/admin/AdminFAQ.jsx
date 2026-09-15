@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import api from "../../config/api";
-import { Plus, Edit2, Trash2, Loader2, Download, Upload, FileSpreadsheet, CheckCircle2, AlertTriangle, X, Info } from "lucide-react";
+import { Plus, Edit2, Trash2, Loader2, Download, Upload, FileSpreadsheet, CheckCircle2, AlertTriangle, X, Info, Search } from "lucide-react";
 
 const EMPTY_FORM = { category: "", question: "", answer: "", sortOrder: 0, isActive: true };
 
@@ -10,6 +10,8 @@ export default function AdminFAQ() {
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [editingId, setEditingId] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("ALL");
   const formRef = useRef(null);
   const fileInputRef = useRef(null);
 
@@ -478,46 +480,103 @@ export default function AdminFAQ() {
       </div>
 
       {/* ==================== TABLE: Configured FAQs ==================== */}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200/90 overflow-hidden">
-        <div className="p-5 border-b border-slate-100 flex items-center justify-between">
-          <div>
-            <h2 className="text-base font-bold text-slate-900">Configured FAQs</h2>
-            <p className="text-xs text-slate-500">Live frequently asked questions currently available.</p>
-          </div>
-          <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-            {faqs.length} Total
-          </span>
-        </div>
+      {(() => {
+        const term = searchTerm.toLowerCase().trim();
+        const filteredFaqs = faqs.filter((faq) => {
+          const matchesSearch =
+            !term ||
+            (faq.question && faq.question.toLowerCase().includes(term)) ||
+            (faq.answer && faq.answer.toLowerCase().includes(term)) ||
+            (faq.category && faq.category.toLowerCase().includes(term));
+          const matchesCategory =
+            selectedCategory === "ALL" ||
+            (faq.category || "General").toLowerCase() === selectedCategory.toLowerCase();
+          return matchesSearch && matchesCategory;
+        });
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50/70 border-b border-slate-200">
-              <tr className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                <th className="p-4">Category</th>
-                <th className="p-4">Question & Answer</th>
-                <th className="p-4">Order</th>
-                <th className="p-4">Status</th>
-                <th className="p-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {loading ? (
-                <tr>
-                  <td colSpan="5" className="p-8 text-center text-slate-400 text-sm">
-                    <div className="flex items-center justify-center gap-2">
-                      <Loader2 className="w-4 h-4 animate-spin text-amber-600" />
-                      Loading FAQs...
-                    </div>
-                  </td>
-                </tr>
-              ) : faqs.length === 0 ? (
-                <tr>
-                  <td colSpan="5" className="p-8 text-center text-slate-400 text-sm">
-                    No FAQs added yet. Create your first FAQ using the form above.
-                  </td>
-                </tr>
-              ) : (
-                faqs.map((faq) => (
+        const categoriesList = Array.from(
+          new Set(faqs.map((f) => f.category || "General").filter(Boolean))
+        ).sort();
+
+        return (
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200/90 overflow-hidden">
+            <div className="p-5 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-base font-bold text-slate-900">Configured FAQs</h2>
+                <p className="text-xs text-slate-500">Live frequently asked questions currently available.</p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Search Bar */}
+                <div className="relative flex-1 sm:w-72">
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search FAQs by question or answer..."
+                    className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+                  />
+                  {searchTerm && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchTerm("")}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+
+                {/* Category Dropdown */}
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition cursor-pointer"
+                >
+                  <option value="ALL">All Categories ({faqs.length})</option>
+                  {categoriesList.map((cat, idx) => (
+                    <option key={idx} value={cat}>{cat}</option>
+                  ))}
+                </select>
+
+                <span className="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-2 rounded-xl shrink-0">
+                  {filteredFaqs.length} / {faqs.length} Total
+                </span>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-slate-50/70 border-b border-slate-200">
+                  <tr className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                    <th className="p-4">Category</th>
+                    <th className="p-4">Question & Answer</th>
+                    <th className="p-4">Order</th>
+                    <th className="p-4">Status</th>
+                    <th className="p-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {loading ? (
+                    <tr>
+                      <td colSpan="5" className="p-8 text-center text-slate-400 text-sm">
+                        <div className="flex items-center justify-center gap-2">
+                          <Loader2 className="w-4 h-4 animate-spin text-amber-600" />
+                          Loading FAQs...
+                        </div>
+                      </td>
+                    </tr>
+                  ) : filteredFaqs.length === 0 ? (
+                    <tr>
+                      <td colSpan="5" className="p-8 text-center text-slate-400 text-sm">
+                        {searchTerm || selectedCategory !== "ALL"
+                          ? "No FAQs match your search or filter criteria."
+                          : "No FAQs added yet. Create your first FAQ using the form above."}
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredFaqs.map((faq) => (
                   <tr key={faq.id} className="hover:bg-slate-50/70 transition">
                     <td className="p-4 align-top whitespace-nowrap">
                       <span className="font-bold text-slate-800 text-sm">
@@ -567,9 +626,11 @@ export default function AdminFAQ() {
                 ))
               )}
             </tbody>
-          </table>
+            </table>
+          </div>
         </div>
-      </div>
+      );
+    })()}
 
       {/* ==================== BULK UPLOAD MODAL ==================== */}
       {showBulkModal && (

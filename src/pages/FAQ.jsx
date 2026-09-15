@@ -604,6 +604,111 @@ const fallbackFaqs = [
     category: 'Digital Signature Certificate (DSC)',
     question: 'What happens when my DSC expires?',
     answer: 'Filings cannot be signed once it expires. It cannot be extended; a fresh certificate must be issued, though the same token can usually be reused. Track the expiry, especially before an approaching MCA or tax deadline.'
+  },
+  {
+    category: 'DPIIT Startup Recognition',
+    question: 'Does DPIIT recognition automatically give me a tax exemption?',
+    answer: 'No, and this is the most common misunderstanding. Recognition gives you the IP, procurement and self-certification benefits. The income tax holiday requires a further, separately assessed application to the Inter-Ministerial Board, and approval rates are considerably lower.'
+  },
+  {
+    category: 'DPIIT Startup Recognition',
+    question: 'Can a proprietorship get DPIIT recognition?',
+    answer: 'No. Only a Private Limited Company, an LLP or a Registered Partnership Firm is eligible. A proprietorship must convert first.'
+  },
+  {
+    category: 'DPIIT Startup Recognition',
+    question: 'What counts as "innovative"?',
+    answer: 'The write-up should show what problem you solve, why the approach differs from what already exists, and how the model scales. A conventional trading, reselling or services business without a differentiating element is unlikely to be recognised.'
+  },
+  {
+    category: 'DPIIT Startup Recognition',
+    question: 'What happened to the angel tax exemption?',
+    answer: 'The angel tax provision that DPIIT recognition used to protect startups from was abolished with effect from April 2025, so that particular benefit no longer needs to be claimed. Confirm the current position before relying on it either way.'
+  },
+  {
+    category: 'DPIIT Startup Recognition',
+    question: 'Does recognition expire?',
+    answer: 'It runs up to ten years from incorporation, and lapses earlier if turnover crosses ₹100 crore in any year.'
+  },
+  {
+    category: 'CE Marking Certification',
+    question: 'Who issues a CE marking?',
+    answer: "Nobody. For most product categories the manufacturer self-declares, backed by the technical file and the Declaration of Conformity. For higher-risk categories a Notified Body must be involved in the assessment, but the declaration remains the manufacturer's."
+  },
+  {
+    category: 'CE Marking Certification',
+    question: 'Do I need a representative inside the EU?',
+    answer: 'For many product categories, an EU-established Authorised Representative or Responsible Person is required for a manufacturer outside the EU, and their details must appear on the product or packaging. Check the requirement for your specific category.'
+  },
+  {
+    category: 'CE Marking Certification',
+    question: 'Is CE marking the same as ISO certification?',
+    answer: 'No. ISO certifies your management system and is voluntary. CE marking is a mandatory legal requirement for covered products entering the EU market.'
+  },
+  {
+    category: 'CE Marking Certification',
+    question: 'Does CE marking cover the UK?',
+    answer: "Great Britain operates its own UKCA marking regime. Northern Ireland's position differs. Verify the current requirement before shipping."
+  },
+  {
+    category: 'CE Marking Certification',
+    question: 'What happens if I affix CE marking without the technical file?',
+    answer: 'It is a serious regulatory offence in the EU. Products can be withdrawn from the market, importers and distributors face liability, and penalties apply. The file must exist and be retainable.'
+  },
+  {
+    category: 'Bureau of Indian Standards (BIS)',
+    question: 'Is BIS certification mandatory for my product?',
+    answer: 'Only if a Quality Control Order has been notified for that product category. The list expands regularly, so check the current notified list rather than relying on older information.'
+  },
+  {
+    category: 'Bureau of Indian Standards (BIS)',
+    question: 'What is the difference between the ISI mark and CRS registration?',
+    answer: 'The ISI mark under Scheme I involves factory inspection and ongoing surveillance and applies to a broad range of products. CRS under Scheme II is primarily for electronics and IT goods, is based on laboratory testing followed by registration, and does not ordinarily involve factory inspection.'
+  },
+  {
+    category: 'Bureau of Indian Standards (BIS)',
+    question: 'Can a foreign manufacturer obtain BIS certification?',
+    answer: 'Yes, through the Foreign Manufacturers Certification Scheme, which requires an Authorised Indian Representative.'
+  },
+  {
+    category: 'Bureau of Indian Standards (BIS)',
+    question: 'Is BIS the same as ISO?',
+    answer: 'No. BIS is an Indian product certification, often legally mandatory. ISO is a voluntary international management system standard. They are not substitutes.'
+  },
+  {
+    category: 'Bureau of Indian Standards (BIS)',
+    question: 'What happens if I sell a notified product without BIS certification?',
+    answer: 'Sale of a product requiring certification without it is an offence under the BIS Act, exposing you to seizure, penalty and prosecution. Marketplaces also delist non-compliant listings.'
+  },
+  {
+    category: 'Professional Tax (PTEC & PTRC)',
+    question: 'Do I need PTEC, PTRC, or both?',
+    answer: 'If you have no employees, you need only PTEC. If you pay salaries above the threshold, you need PTRC as well. Companies and LLPs generally need both from the outset.'
+  },
+  {
+    category: 'Professional Tax (PTEC & PTRC)',
+    question: 'I am a salaried employee. Do I need to register?',
+    answer: 'No. Your employer deducts and deposits it under their PTRC. You need a PTEC only if you have a separate professional or business income.'
+  },
+  {
+    category: 'Professional Tax (PTEC & PTRC)',
+    question: 'I am a director of three companies. Do I pay three times?',
+    answer: 'No. The PTEC liability attaches to the individual, and a single certificate covers you regardless of how many directorships or partnerships you hold.'
+  },
+  {
+    category: 'Professional Tax (PTEC & PTRC)',
+    question: 'My firm has partners. Who pays?',
+    answer: 'A partnership firm or LLP is not itself enrolled as an entity for PTEC in the ordinary case; instead each partner is individually liable. A firm with three partners therefore has three liabilities.'
+  },
+  {
+    category: 'Professional Tax (PTEC & PTRC)',
+    question: 'What are the penalties for missing this?',
+    answer: 'Late registration attracts a daily penalty, late returns a fixed penalty per return, and unpaid tax carries monthly interest plus a penalty. Because the amounts are small, PT is the registration businesses most often neglect — and the penalties on a few years of neglect regularly exceed the tax many times over.'
+  },
+  {
+    category: 'Professional Tax (PTEC & PTRC)',
+    question: 'Can I stop PTRC compliance if all my employees leave?',
+    answer: 'The PTRC can be surrendered when there are no longer any employees. Leaving it active creates a continuing return-filing obligation.'
   }
 ];
 

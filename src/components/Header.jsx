@@ -43,10 +43,10 @@ export default function Header() {
       name: 'IPR Services',
       dropdown: 'ipr',
       items: [
-        { 
-          name: 'Which IP Protection Do I Need?', 
-          path: '/legal-services/ipr-services-in-mumbai', 
-          isFeatured: true 
+        {
+          name: 'Which IP Protection Do I Need?',
+          path: '/legal-services/ipr-services-in-mumbai',
+          isFeatured: true
         },
         { name: 'Trademarks Registration', path: '/legal-services/trademark-registration-in-mumbai' },
         { name: 'Copyright Registration', path: '/legal-services/copyright-registration-in-mumbai' },
@@ -59,10 +59,10 @@ export default function Header() {
       name: 'Company Formation',
       dropdown: 'formation',
       items: [
-        { 
-          name: 'Which Business Structure Should I Choose?', 
-          path: '/business-services/which-business-structure-should-i-choose', 
-          isFeatured: true 
+        {
+          name: 'Which Business Structure Should I Choose?',
+          path: '/business-services/which-business-structure-should-i-choose',
+          isFeatured: true
         },
         { name: 'Sole Proprietorship', path: '/business-services/sole-proprietorship-registration-in-mumbai' },
         { name: 'Partnership Firm', path: '/business-services/partnership-firm-registration-in-mumbai' },
@@ -77,10 +77,15 @@ export default function Header() {
       name: 'Licenses',
       dropdown: 'licenses',
       items: [
-        { 
-          name: 'Which Registrations Do You Actually Need?', 
-          path: '/business-registration/which-registrations-does-my-business-need', 
-          isFeatured: true 
+        {
+          name: 'Which Registrations Do You Actually Need?',
+          path: '/business-registration/which-registrations-does-my-business-need',
+          isFeatured: true
+        },
+        {
+          name: 'Statutory Compliance Calendar (Mumbai & MH)',
+          path: '/compliance-calendar',
+          isFeatured: true
         },
         { name: 'MSME / Udyam Registration', path: '/business-registration/msme-udyam-registration-in-mumbai' },
         { name: 'Gumasta / Shop Act License', path: '/business-registration/gumasta-license-registration-in-mumbai' },
@@ -88,10 +93,15 @@ export default function Header() {
         { name: 'GST Registration & Filing', path: '/business-registration/gst-registration-filing-in-mumbai' },
         { name: 'FSSAI (Food License)', path: '/business-registration/fssai-food-license-in-mumbai' },
         { name: 'Digital Signature (DSC)', path: '/business-registration/dsc-digital-signature-in-mumbai' },
-        { name: 'ISO Certification', path: '/business-registration/iso-certification-in-mumbai' }
+        { name: 'ISO Certification', path: '/business-registration/iso-certification-in-mumbai' },
+        { name: 'Professional Tax — PTEC & PTRC (Maharashtra)', path: '/business-registration/professional-tax-ptec-ptrc-in-mumbai' },
+        { name: 'Bureau of Indian Standards (BIS)', path: '/business-registration/bis-certification-in-mumbai' },
+        { name: 'CE Marking', path: '/business-registration/ce-marking-in-mumbai' },
+        { name: 'DPIIT Startup Recognition', path: '/business-registration/dpiit-startup-recognition-in-mumbai' }
       ]
     },
     { name: 'About Us', path: '/about' },
+    { name: 'FAQ', path: '/faq' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -140,20 +150,20 @@ export default function Header() {
                 {item.dropdown ? (
                   <button
                     className={`px-4 py-2 text-sm font-semibold rounded-lg flex items-center transition duration-200 cursor-pointer ${activeDropdown === item.dropdown
-                        ? 'text-primary-600 bg-primary-50'
-                        : 'text-slate-700 hover:text-slate-950 hover:bg-slate-50'
+                      ? 'text-primary-600 dark:text-primary-600 bg-primary-50 dark:bg-primary-50/80 font-bold'
+                      : 'text-slate-800 dark:text-slate-900 hover:text-slate-950 dark:hover:text-black hover:bg-slate-50 dark:hover:bg-slate-100'
                       }`}
                   >
                     {item.name}
-                    <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-250 ${activeDropdown === item.dropdown ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 ml-1 text-slate-700 dark:text-slate-800 transition-transform duration-250 ${activeDropdown === item.dropdown ? 'rotate-180' : ''}`} />
                   </button>
                 ) : (
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
                       `px-4 py-2 text-sm font-semibold rounded-lg transition duration-200 block ${isActive
-                        ? 'text-primary-600 bg-primary-50 font-bold'
-                        : 'text-slate-700 hover:text-slate-950 hover:bg-slate-50'
+                        ? 'text-primary-600 dark:text-primary-600 bg-primary-50 dark:bg-primary-50/80 font-bold'
+                        : 'text-slate-800 dark:text-slate-900 hover:text-slate-950 dark:hover:text-black hover:bg-slate-50 dark:hover:bg-slate-100'
                       }`
                     }
                   >
@@ -169,33 +179,27 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute left-0 mt-1 w-72 bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden z-50 p-2.5 grid gap-1"
+                      className={`absolute left-0 mt-1 ${item.dropdown === 'licenses' ? 'w-84 sm:w-88' : 'w-72'} max-h-[82vh] overflow-y-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-2xl z-50 p-2.5 grid gap-1`}
                     >
                       {item.items.map((subItem, sIdx) => (
                         <Link
                           key={sIdx}
                           to={subItem.path}
-                          className={`px-3 py-2 text-sm rounded-xl transition duration-150 flex items-center justify-between font-medium ${
-                            subItem.isFeatured
-                              ? 'bg-amber-50/90 dark:bg-amber-950/40 text-amber-950 dark:text-amber-100 hover:bg-amber-100/80 dark:hover:bg-amber-900/50 border border-amber-200/80 dark:border-amber-800/60 mb-1.5 shadow-xs'
-                              : 'text-slate-700 dark:text-slate-200 hover:text-primary-600 hover:bg-slate-50 dark:hover:bg-slate-800/50'
-                          }`}
+                          className={`px-3 py-2 text-sm rounded-xl transition duration-150 flex items-center justify-between font-medium ${subItem.isFeatured
+                              ? 'bg-amber-50/90 dark:bg-amber-950/50 text-amber-950 dark:text-amber-200 hover:bg-amber-100/80 dark:hover:bg-amber-900/60 border border-amber-200/80 dark:border-amber-800/60 mb-1.5 shadow-xs'
+                              : 'text-slate-700 dark:text-slate-200 hover:text-primary-600 dark:hover:text-amber-400 hover:bg-slate-50 dark:hover:bg-slate-800/70'
+                            }`}
                         >
                           <div className="flex items-center gap-2.5 min-w-0 pr-1">
                             {subItem.isFeatured ? (
                               <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
                             ) : (
-                              <span className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-0.5 mr-1 shrink-0 transition-colors duration-150"></span>
+                              <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 ml-0.5 mr-1 shrink-0 transition-colors duration-150"></span>
                             )}
-                            <span className={`${subItem.isFeatured ? 'text-xs sm:text-sm font-bold leading-snug text-amber-950' : 'text-xs sm:text-sm font-semibold'}`}>
+                            <span className={`${subItem.isFeatured ? 'text-xs sm:text-sm font-bold leading-snug text-amber-950 dark:text-amber-200' : 'text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200'}`}>
                               {subItem.name}
                             </span>
                           </div>
-                          {subItem.isFeatured && (
-                            <span className="text-[10px] uppercase font-black px-1.5 py-0.5 rounded bg-amber-200 text-amber-900 tracking-wider shrink-0 shadow-2xs">
-                              GUIDE
-                            </span>
-                          )}
                         </Link>
                       ))}
                     </motion.div>
@@ -212,7 +216,7 @@ export default function Header() {
               onClick={toggleTheme}
               aria-label="Toggle Theme"
               title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              className="w-10 h-10 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-xs cursor-pointer group"
+              className="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center transition shadow-xs cursor-pointer group"
             >
               {theme === 'dark' ? (
                 <Sun className="w-5 h-5 text-amber-500 transition-transform group-hover:rotate-45" />
@@ -239,15 +243,15 @@ export default function Header() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="p-2 text-slate-700 hover:bg-slate-100 rounded-full transition cursor-pointer"
+              className="p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition cursor-pointer"
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5 text-slate-700" />}
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-200" />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-slate-800 hover:bg-slate-100 rounded-full transition"
+              className="p-2 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition"
             >
-              {isOpen ? <X className="w-6 h-6 text-slate-800" /> : <Menu className="w-6 h-6 text-slate-800" />}
+              {isOpen ? <X className="w-6 h-6 text-slate-800 dark:text-slate-200" /> : <Menu className="w-6 h-6 text-slate-800 dark:text-slate-200" />}
             </button>
           </div>
         </div>
@@ -260,7 +264,7 @@ export default function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25 }}
-              className="lg:hidden bg-white border-t border-slate-200 shadow-xl overflow-hidden max-h-[85vh] overflow-y-auto"
+              className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden max-h-[85vh] overflow-y-auto"
             >
               <div className="px-4 pt-3 pb-6 space-y-1">
                 {navItems.map((item, idx) => (
@@ -269,7 +273,7 @@ export default function Header() {
                       <div>
                         <button
                           onClick={() => setActiveDropdown(activeDropdown === item.dropdown ? null : item.dropdown)}
-                          className="w-full flex justify-between items-center py-2.5 px-3 text-base font-bold text-slate-800 rounded-lg hover:bg-slate-50"
+                          className="w-full flex justify-between items-center py-2.5 px-3 text-base font-bold text-slate-800 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
                         >
                           {item.name}
                           <ChevronDown className={`w-5 h-5 text-slate-500 transition-transform ${activeDropdown === item.dropdown ? 'rotate-180' : ''}`} />
@@ -286,11 +290,10 @@ export default function Header() {
                                 <Link
                                   key={sIdx}
                                   to={subItem.path}
-                                  className={`block py-2 text-sm transition ${
-                                    subItem.isFeatured
-                                      ? 'text-amber-800 dark:text-amber-300 font-bold flex items-center gap-2 bg-amber-50 dark:bg-amber-950/40 px-3 py-2 rounded-lg border border-amber-200/60 my-1'
-                                      : 'text-slate-600 dark:text-slate-400 hover:text-primary-600'
-                                  }`}
+                                  className={`block py-2 text-sm transition ${subItem.isFeatured
+                                      ? 'text-amber-800 dark:text-amber-200 font-bold flex items-center gap-2 bg-amber-50 dark:bg-amber-950/50 px-3 py-2 rounded-lg border border-amber-200/60 dark:border-amber-800/60 my-1'
+                                      : 'text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-amber-400'
+                                    }`}
                                 >
                                   {subItem.isFeatured && <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />}
                                   <span>{subItem.name}</span>
@@ -305,8 +308,8 @@ export default function Header() {
                         to={item.path}
                         className={({ isActive }) =>
                           `block py-2.5 px-3 text-base font-bold rounded-lg transition ${isActive
-                            ? 'text-primary-600 bg-primary-50 font-bold'
-                            : 'text-slate-800 hover:bg-slate-50'
+                            ? 'text-primary-600 dark:text-amber-400 bg-primary-50 dark:bg-slate-800 font-bold'
+                            : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'
                           }`
                         }
                       >

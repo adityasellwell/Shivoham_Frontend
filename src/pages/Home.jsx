@@ -191,105 +191,61 @@ export default function Home() {
         }}
       />
 
-      {/* Premium Hero Section */}
-      <section className="relative bg-linear-to-br from-[#F4C430] via-[#FFB300] to-[#FF9933] text-[#0B4619] pt-20 pb-11 px-4 sm:px-6 lg:px-8 flex items-center min-h-[75vh]">
-        {/* Animated Background Gradients */}
+      {/* Compact Hero Section */}
+      <section className="relative bg-gradient-to-br from-[#F4C430] via-[#FFB300] to-[#FF9933] text-[#0B4619] py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center overflow-hidden">
+        {/* Subtle Background Glows */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              x: [0, 50, 0],
-              y: [0, -30, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-white/20 blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              x: [0, -60, 0],
-              y: [0, 40, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute top-1/2 right-10 w-96 h-96 rounded-full bg-[#0B4619]/10 blur-3xl"
-          />
+          <div className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-white/20 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-[#0B4619]/10 blur-3xl pointer-events-none" />
         </div>
 
-        <div className="max-w-7xl mx-auto w-full flex flex-col items-center relative z-10 px-4">
-          {/* Hero Content (Carousel) */}
-          <div className="w-full space-y-6 text-center h-full flex flex-col justify-center min-h-75">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-white/20 border border-white/30 text-[#0B4619] text-xs font-bold uppercase tracking-wider mx-auto shadow-sm"
-            >
-              <Sparkles className="w-4 h-4 animate-spin-slow" />
-              Shivoham & Associates
-            </motion.div>
+        <div className="max-w-4xl mx-auto w-full flex flex-col items-center relative z-10 text-center">
+          {/* Pill Badge */}
+          <div className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-white/20 border border-white/30 text-[#0B4619] text-xs font-bold uppercase tracking-wider shadow-xs mb-3 sm:mb-4">
+            <Sparkles className="w-3.5 h-3.5" />
+            Shivoham & Associates
+          </div>
 
-            <div className="relative min-h-62.5 sm:min-h-50 lg:min-h-60 w-full flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0 flex flex-col items-center justify-center w-full"
-                >
-                  <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-tight mb-4 text-[#0B4619] w-full max-w-5xl mx-auto px-2">
-                    {heroSlides[currentSlide].title}{" "}
-                    <span className="text-white drop-shadow-md">
-                      {heroSlides[currentSlide].highlight}
-                    </span>{" "}
-                    {heroSlides[currentSlide].suffix}
-                  </h1>
-
-                  <p className="text-base sm:text-lg text-[#0B4619]/90 max-w-3xl mx-auto leading-relaxed font-semibold px-4">
-                    {heroSlides[currentSlide].desc}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Slider Dots Indicator */}
-            <div className="flex justify-center space-x-3 pt-6 lg:pt-2">
-              {heroSlides.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    currentSlide === idx
-                      ? "bg-[#0B4619] w-2.5"
-                      : "bg-[#0B4619]/30 hover:bg-[#0B4619]/50 w-2.5"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="pt-6"
-            >
-              {/* <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#0B4619] hover:bg-[#073010] text-white font-extrabold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+          {/* Headline & Subtitle Carousel Area */}
+          <div className="relative min-h-[110px] sm:min-h-[105px] w-full flex items-center justify-center mb-4">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35 }}
+                className="space-y-2.5 w-full"
               >
-                Get Started
-                <ArrowRight className="w-5 h-5" />
-              </Link> */}
-            </motion.div>
+                <h1 className="font-display font-black text-2xl sm:text-4xl md:text-5xl tracking-tight leading-tight text-[#0B4619] max-w-3xl mx-auto">
+                  {heroSlides[currentSlide].title}{" "}
+                  <span className="text-white drop-shadow-sm">
+                    {heroSlides[currentSlide].highlight}
+                  </span>{" "}
+                  {heroSlides[currentSlide].suffix}
+                </h1>
+
+                <p className="text-xs sm:text-sm md:text-base text-[#0B4619]/90 max-w-2xl mx-auto leading-relaxed font-medium px-2">
+                  {heroSlides[currentSlide].desc}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* 3 Slider Dots Indicator */}
+          <div className="flex justify-center items-center space-x-2.5">
+            {heroSlides.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                aria-label={`Slide ${idx + 1}`}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  currentSlide === idx
+                    ? "bg-[#0B4619]"
+                    : "bg-[#0B4619]/35 hover:bg-[#0B4619]/60"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </section>

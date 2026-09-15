@@ -1192,7 +1192,7 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                           Registry, MCA, GST, DGFT, FSSAI, stamp duty and similar charges paid directly to an authority or portal.
                         </td>
                         <td className="p-4 sm:px-6">
-                          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-500/20">
+                          <span className="font-bold text-xs text-rose-700 dark:text-rose-400">
                             No (Non-Refundable)
                           </span>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
@@ -1208,7 +1208,7 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                           Certification body charges, laboratory testing, DSC tokens, notary, courier, translation.
                         </td>
                         <td className="p-4 sm:px-6">
-                          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-500/20">
+                          <span className="font-bold text-xs text-rose-700 dark:text-rose-400">
                             No (Once incurred)
                           </span>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
@@ -1224,7 +1224,7 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                           Our charge for the professional legal, drafting, and regulatory filing work we perform.
                         </td>
                         <td className="p-4 sm:px-6">
-                          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-500/20">
+                          <span className="font-bold text-xs text-rose-700 dark:text-rose-400">
                             No (Subject to Cl. 5)
                           </span>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">

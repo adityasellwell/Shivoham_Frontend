@@ -1602,5 +1602,293 @@ export const services = {
         a: 'The certification cycle is generally three years, with surveillance audits in between and a recertification audit at the end.'
       }
     ]
+  },
+  'professional-tax': {
+    id: 'professional-tax',
+    categoryId: 'licenses',
+    title: 'Professional Tax (PTEC & PTRC)',
+    shortDescription: 'State tax on professions, trades and employments, administered in Maharashtra through two separate registrations.',
+    heroLine: 'State tax on professions, trades and employments, administered in Maharashtra through two separate registrations.',
+    overviewTitle: 'The distinction, stated simply',
+    distinction: {
+      title: 'The distinction, stated simply',
+      items: [
+        {
+          term: 'PTEC (Enrolment Certificate)',
+          desc: 'for paying professional tax on your own account. Required by companies, LLPs, partners, directors, proprietors and self-employed professionals. A flat annual amount, with no return to file'
+        },
+        {
+          term: 'PTRC (Registration Certificate)',
+          desc: 'for employers deducting professional tax from employee salaries and depositing it, with periodic returns'
+        }
+      ],
+      note: "A company typically needs both: PTEC for itself, PTRC for its payroll. A partnership firm is not taxed as an entity, but each partner needs their own PTEC. Each director needs one too. An LLP with three partners therefore has three PTEC liabilities plus the firm's own position — this is the point clients most often get wrong."
+    },
+    benefitsTitle: 'Key Benefits & Reasons to Comply',
+    benefits: [
+      'Statutory obligation: registration is required within 30 days of becoming liable',
+      'Late registration attracts a daily penalty; late returns attract a fixed penalty per return plus monthly interest and a penalty on unpaid tax',
+      'Professional tax paid is deductible from salary income under the old tax regime',
+      'A clean PT record is checked during bank credit assessment and in due diligence',
+      'Penalties compound monthly and routinely exceed the tax itself on neglected registrations'
+    ],
+    keyFeatures: {
+      title: 'Key Features to State on the Page',
+      items: [
+        'The annual liability is capped by the Constitution at ₹2,500 per person per year',
+        'PTEC is a flat annual payment with no return filing',
+        'PTRC slabs are salary-based and, uniquely in Maharashtra, gender-differentiated — women employees are exempt up to a substantially higher monthly salary than men',
+        'The February deduction is higher than other months so the annual total lands exactly on the cap',
+        'A composition option allows a self-employed person to discharge several years of PTEC liability by a single advance payment',
+        'Due dates were revised by a February 2026 notification. Verify current dates before publishing any calendar'
+      ],
+      advisoryNote: "Publish the slab table only after confirming the current figures, and date-stamp it. Slab values, the female exemption threshold and the due dates have all moved in recent years, and a stale table on a professional firm's site is worse than no table."
+    },
+    documents: [
+      'PAN of the entity and of the applicant',
+      'Certificate of Incorporation, Partnership Deed or equivalent',
+      'Address proof of the place of business',
+      'Bank account details and cancelled cheque',
+      'Details of directors or partners, for PTEC',
+      'Employee count and salary details, for PTRC',
+      'Aadhaar and photograph of the signatory'
+    ],
+    process: [
+      { step: 1, title: 'Profiling – understand the need of the Employer/ business enterprise' },
+      { step: 2, title: 'Documentation — gather all documents required in the process' },
+      { step: 3, title: 'Execution – submit applications, the officer reviews and may raise queries' },
+      { step: 4, title: 'Certificates issued with the enrolment and registration numbers' },
+      { step: 5, title: 'Pay and file on the prescribed dates through the GRAS payment system' }
+    ],
+    faqs: [
+      {
+        q: 'Do I need PTEC, PTRC, or both?',
+        a: 'If you have no employees, you need only PTEC. If you pay salaries above the threshold, you need PTRC as well. Companies and LLPs generally need both from the outset.'
+      },
+      {
+        q: 'I am a salaried employee. Do I need to register?',
+        a: 'No. Your employer deducts and deposits it under their PTRC. You need a PTEC only if you have a separate professional or business income.'
+      },
+      {
+        q: 'I am a director of three companies. Do I pay three times?',
+        a: 'No. The PTEC liability attaches to the individual, and a single certificate covers you regardless of how many directorships or partnerships you hold.'
+      },
+      {
+        q: 'My firm has partners. Who pays?',
+        a: 'A partnership firm or LLP is not itself enrolled as an entity for PTEC in the ordinary case; instead each partner is individually liable. A firm with three partners therefore has three liabilities.'
+      },
+      {
+        q: 'What are the penalties for missing this?',
+        a: 'Late registration attracts a daily penalty, late returns a fixed penalty per return, and unpaid tax carries monthly interest plus a penalty. Because the amounts are small, PT is the registration businesses most often neglect — and the penalties on a few years of neglect regularly exceed the tax many times over.'
+      },
+      {
+        q: 'Can I stop PTRC compliance if all my employees leave?',
+        a: 'The PTRC can be surrendered when there are no longer any employees. Leaving it active creates a continuing return-filing obligation.'
+      }
+    ]
+  },
+  'bis-certification': {
+    id: 'bis-certification',
+    categoryId: 'licenses',
+    title: 'Bureau of Indian Standards (BIS)',
+    shortDescription: 'Mandatory product certification for goods covered by a Quality Control Order, and voluntary certification for others.',
+    heroLine: 'Mandatory product certification for goods covered by a Quality Control Order, and voluntary certification for others.',
+    overviewTitle: 'The schemes',
+    schemes: {
+      title: 'The schemes',
+      headers: ['Scheme', 'Covers'],
+      rows: [
+        {
+          scheme: 'ISI Mark (Scheme I)',
+          covers: 'Product certification for goods notified under a Quality Control Order'
+        },
+        {
+          scheme: 'CRS (Scheme II)',
+          covers: 'Compulsory Registration Scheme, primarily electronics and IT products, based on testing in a BIS-recognised laboratory followed by self-declaration'
+        },
+        {
+          scheme: 'FMCS',
+          covers: 'Foreign Manufacturers Certification Scheme, for overseas manufacturers supplying to India'
+        },
+        {
+          scheme: 'Hallmarking',
+          covers: 'Mandatory for gold jewellery, with a unique HUID'
+        }
+      ]
+    },
+    benefits: [
+      'Legal authority to sell products that are notified as mandatory — without it, sale is prohibited',
+      'The ISI mark is a recognised consumer trust signal in the Indian market',
+      'Required by most large retailers, e-commerce platforms and government tenders',
+      'Protects against seizure, recall and penalty action',
+      'Supports export credibility for markets that accept Indian standards',
+      'Voluntary certification differentiates products in categories where it is not yet mandatory'
+    ],
+    documents: [
+      'Certificate of Incorporation, PAN and GST',
+      'Factory or manufacturing unit details, including layout and process flow',
+      'Test reports from a BIS-recognised laboratory',
+      'Details of in-house testing facilities and quality control personnel',
+      'Trademark registration or application for the brand',
+      'Authorised Indian Representative details, for foreign manufacturers'
+    ],
+    process: [
+      { step: 1, title: 'Check whether a Quality Control Order applies to your product. This determines whether certification is mandatory or optional' },
+      { step: 2, title: 'Identify the applicable Indian Standard and the relevant scheme' },
+      { step: 3, title: 'Test the product at a BIS-recognised laboratory' },
+      { step: 4, title: 'Apply on the BIS portal with the test reports and factory details' },
+      { step: 5, title: 'Factory inspection, where the scheme requires it' },
+      { step: 6, title: 'Licence granted, with authority to use the standard mark' }
+    ],
+    faqs: [
+      {
+        q: 'Is BIS certification mandatory for my product?',
+        a: 'Only if a Quality Control Order has been notified for that product category. The list expands regularly, so check the current notified list rather than relying on older information.'
+      },
+      {
+        q: 'What is the difference between the ISI mark and CRS registration?',
+        a: 'The ISI mark under Scheme I involves factory inspection and ongoing surveillance and applies to a broad range of products. CRS under Scheme II is primarily for electronics and IT goods, is based on laboratory testing followed by registration, and does not ordinarily involve factory inspection.'
+      },
+      {
+        q: 'Can a foreign manufacturer obtain BIS certification?',
+        a: 'Yes, through the Foreign Manufacturers Certification Scheme, which requires an Authorised Indian Representative.'
+      },
+      {
+        q: 'Is BIS the same as ISO?',
+        a: 'No. BIS is an Indian product certification, often legally mandatory. ISO is a voluntary international management system standard. They are not substitutes.'
+      },
+      {
+        q: 'What happens if I sell a notified product without BIS certification?',
+        a: 'Sale of a product requiring certification without it is an offence under the BIS Act, exposing you to seizure, penalty and prosecution. Marketplaces also delist non-compliant listings.'
+      }
+    ]
+  },
+  'ce-marking': {
+    id: 'ce-marking',
+    categoryId: 'licenses',
+    title: 'CE Marking Certification',
+    shortDescription: 'The conformity marking required to place many categories of product on the market in the European Economic Area.',
+    heroLine: 'The conformity marking required to place many categories of product on the market in the European Economic Area.',
+    overviewTitle: 'What it actually is',
+    fullDescription: "CE marking is the manufacturer's own declaration that the product meets applicable EU health, safety and environmental requirements. It is not a quality mark and not a certificate issued by the EU. It is a legal declaration you make and must be able to defend.",
+    benefits: [
+      'Legal access to the EU and EEA market; without it, covered products cannot be placed on sale',
+      'Free movement of the product across all member states without country-by-country approval',
+      'Signals regulatory compliance to EU distributors and importers, who are legally exposed if they handle non-compliant goods',
+      'Frequently accepted as a credibility marker in non-EU markets as well',
+      'Supports customs clearance into the EU'
+    ],
+    documents: [
+      'Product technical file — design, drawings, specifications, bill of materials',
+      'Risk assessment',
+      'Test reports against the applicable harmonised standards',
+      'User manual and labelling in the required languages',
+      'EU Declaration of Conformity, signed by the manufacturer',
+      'Details of the EU Authorised Representative where the manufacturer is outside the EU'
+    ],
+    process: [
+      { step: 1, title: 'Identify the applicable directives or regulations for the product category' },
+      { step: 2, title: 'Identify the harmonised standards that apply' },
+      { step: 3, title: 'Determine the conformity assessment route — self-declaration for lower-risk products, or involvement of a Notified Body for higher-risk categories' },
+      { step: 4, title: 'Testing against the applicable standards' },
+      { step: 5, title: 'Compile the technical file and retain it for the prescribed period' },
+      { step: 6, title: 'Draw up and sign the EU Declaration of Conformity' },
+      { step: 7, title: 'Affix the CE marking and appoint an EU Authorised Representative where required' }
+    ],
+    faqs: [
+      {
+        q: 'Who issues a CE marking?',
+        a: "Nobody. For most product categories the manufacturer self-declares, backed by the technical file and the Declaration of Conformity. For higher-risk categories a Notified Body must be involved in the assessment, but the declaration remains the manufacturer's."
+      },
+      {
+        q: 'Do I need a representative inside the EU?',
+        a: 'For many product categories, an EU-established Authorised Representative or Responsible Person is required for a manufacturer outside the EU, and their details must appear on the product or packaging. Check the requirement for your specific category.'
+      },
+      {
+        q: 'Is CE marking the same as ISO certification?',
+        a: 'No. ISO certifies your management system and is voluntary. CE marking is a mandatory legal requirement for covered products entering the EU market.'
+      },
+      {
+        q: 'Does CE marking cover the UK?',
+        a: "Great Britain operates its own UKCA marking regime. Northern Ireland's position differs. Verify the current requirement before shipping."
+      },
+      {
+        q: 'What happens if I affix CE marking without the technical file?',
+        a: 'It is a serious regulatory offence in the EU. Products can be withdrawn from the market, importers and distributors face liability, and penalties apply. The file must exist and be retainable.'
+      }
+    ]
+  },
+  'dpiit-startup': {
+    id: 'dpiit-startup',
+    categoryId: 'licenses',
+    title: 'DPIIT Startup Recognition',
+    shortDescription: 'Official recognition under the Startup India initiative, unlocking tax, IP and procurement benefits.',
+    heroLine: 'Official recognition under the Startup India initiative, unlocking tax, IP and procurement benefits.',
+    fullDescription: 'DPIIT Startup Recognition is granted by the Department for Promotion of Industry and Internal Trade, Ministry of Commerce and Industry, under the Startup India initiative. Eligible Private Limited Companies, LLPs, and Registered Partnerships with innovative business models can register to access substantial government incentives, including 80% patent fee rebates, 50% trademark fee rebates, Section 80-IAC 3-year income tax holidays, and public procurement relaxations.',
+    eligibility: {
+      title: 'Eligibility Criteria',
+      subtitle: 'Statutory recognition under Startup India scheme unlocking Section 80-IAC tax exemption, fast-track IP rebates, and procurement relaxations.',
+      items: [
+        'Incorporated as a Private Limited Company, LLP or Registered Partnership Firm',
+        'Within 10 years of the date of incorporation',
+        'Turnover below ₹100 crore in every financial year since incorporation',
+        'Working towards innovation, development or improvement of a product, process or service, or a scalable business model with high potential for employment or wealth creation',
+        'Not formed by splitting up or reconstructing an existing business'
+      ]
+    },
+    benefits: [
+      'Income tax holiday — three consecutive years of profit out of the first ten, subject to a separate certification from the Inter-Ministerial Board. Recognition alone does not grant this',
+      'IP fee concessions — an 80% rebate on patent fees and 50% on trademark fees, with government-empanelled facilitator costs borne by the government under the SIPP scheme',
+      'Self-certification of compliance under prescribed labour and environment laws for an initial period, with no inspections in the ordinary course',
+      'Public procurement relaxations — exemption from prior turnover and experience criteria in government tenders, and exemption from earnest money deposit',
+      'Faster winding up under a simplified insolvency process',
+      'Access to the SIDBI Fund of Funds and to state startup policy benefits',
+      'Recognition is widely used as a credibility marker with investors and incubators'
+    ],
+    documents: [
+      'Certificate of Incorporation or Registration',
+      'PAN of the entity',
+      'Details of directors or partners',
+      'A brief write-up on how the business is innovative or scalable, which is the part applications are actually judged on',
+      'Supporting material — website, pitch deck, patent filings, awards, funding details',
+      'Authorisation from the authorised signatory'
+    ],
+    process: [
+      { step: 1, title: 'Register the entity' },
+      { step: 2, title: 'Apply for recognition' },
+      { step: 3, title: 'Assessment by DPIIT' },
+      { step: 4, title: 'Recognition certificate issued with a DPIIT recognition number' },
+      { step: 5, title: 'Apply separately to the Inter-Ministerial Board if claiming the income tax holiday' }
+    ],
+    atAGlanceTitle: 'At a Glance',
+    atAGlanceHeaders: ['Parameter', 'Details'],
+    feesAtAGlance: [
+      { particular: 'Government fee', detail: 'Nil' },
+      { particular: 'Timeline', detail: 'Typically a few working days once the application is complete' },
+      { particular: 'Validity', detail: 'Up to 10 years from incorporation, subject to the turnover ceiling' },
+      { particular: 'Portal', detail: 'startupindia.gov.in' }
+    ],
+    faqs: [
+      {
+        q: 'Does DPIIT recognition automatically give me a tax exemption?',
+        a: 'No, and this is the most common misunderstanding. Recognition gives you the IP, procurement and self-certification benefits. The income tax holiday requires a further, separately assessed application to the Inter-Ministerial Board, and approval rates are considerably lower.'
+      },
+      {
+        q: 'Can a proprietorship get DPIIT recognition?',
+        a: 'No. Only a Private Limited Company, an LLP or a Registered Partnership Firm is eligible. A proprietorship must convert first.'
+      },
+      {
+        q: 'What counts as "innovative"?',
+        a: 'The write-up should show what problem you solve, why the approach differs from what already exists, and how the model scales. A conventional trading, reselling or services business without a differentiating element is unlikely to be recognised.'
+      },
+      {
+        q: 'What happened to the angel tax exemption?',
+        a: 'The angel tax provision that DPIIT recognition used to protect startups from was abolished with effect from April 2025, so that particular benefit no longer needs to be claimed. Confirm the current position before relying on it either way.'
+      },
+      {
+        q: 'Does recognition expire?',
+        a: 'It runs up to ten years from incorporation, and lapses earlier if turnover crosses ₹100 crore in any year.'
+      }
+    ]
   }
 };
