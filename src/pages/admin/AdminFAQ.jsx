@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import api from "../../config/api";
-import { Plus, Edit2, Trash2, Loader2, Download, Upload, FileSpreadsheet, CheckCircle2, AlertTriangle, X, Info, Search } from "lucide-react";
+import { Plus, Edit2, Trash2, Loader2, Download, Upload, FileSpreadsheet, CheckCircle2, AlertTriangle, X, Info, Search, ChevronLeft, ChevronRight } from "lucide-react";
 
 const EMPTY_FORM = { category: "", question: "", answer: "", sortOrder: 0, isActive: true };
 
@@ -12,7 +12,12 @@ export default function AdminFAQ() {
   const [saving, setSaving] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("ALL");
+  const [currentPage, setCurrentPage] = useState(1);
   const formRef = useRef(null);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory]);
   const fileInputRef = useRef(null);
 
   // Bulk Upload Modal State
@@ -498,6 +503,12 @@ export default function AdminFAQ() {
           new Set(faqs.map((f) => f.category || "General").filter(Boolean))
         ).sort();
 
+        const ITEMS_PER_PAGE = 20;
+        const totalPages = Math.ceil(filteredFaqs.length / ITEMS_PER_PAGE) || 1;
+        const safeCurrentPage = Math.min(currentPage, totalPages);
+        const startIndex = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
+        const paginatedFaqs = filteredFaqs.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
         return (
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200/90 overflow-hidden">
             <div className="p-5 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -576,7 +587,7 @@ export default function AdminFAQ() {
                       </td>
                     </tr>
                   ) : (
-                    filteredFaqs.map((faq) => (
+                    paginatedFaqs.map((faq) => (
                   <tr key={faq.id} className="hover:bg-slate-50/70 transition">
                     <td className="p-4 align-top whitespace-nowrap">
                       <span className="font-bold text-slate-800 text-sm">
@@ -628,6 +639,54 @@ export default function AdminFAQ() {
             </tbody>
             </table>
           </div>
+
+          {/* Pagination Controls */}
+          {filteredFaqs.length > 0 && (
+            <div className="p-4 border-t border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <span className="text-slate-500 font-medium">
+                Showing <strong className="text-slate-800">{startIndex + 1}</strong> to <strong className="text-slate-800">{Math.min(startIndex + ITEMS_PER_PAGE, filteredFaqs.length)}</strong> of <strong className="text-slate-800">{filteredFaqs.length}</strong> FAQs
+              </span>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  disabled={safeCurrentPage === 1}
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer flex items-center gap-1 shadow-2xs"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  Previous
+                </button>
+
+                <div className="flex items-center gap-1 px-1 overflow-x-auto max-w-[200px] sm:max-w-none">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                    <button
+                      key={pageNum}
+                      type="button"
+                      onClick={() => setCurrentPage(pageNum)}
+                      className={`w-7 h-7 rounded-lg text-xs font-bold transition cursor-pointer ${
+                        safeCurrentPage === pageNum
+                          ? "bg-amber-500 text-white shadow-xs"
+                          : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100"
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  disabled={safeCurrentPage >= totalPages}
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer flex items-center gap-1 shadow-2xs"
+                >
+                  Next
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       );
     })()}
