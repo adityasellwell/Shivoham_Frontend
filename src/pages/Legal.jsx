@@ -39,8 +39,21 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
     } else {
       setActiveTab('disclaimer');
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [location.pathname]);
+
+    if (location.hash) {
+      const targetId = location.hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          const yOffset = -160;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 200);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location.pathname, location.hash]);
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
@@ -48,6 +61,17 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
     else if (tabId === 'privacy') navigate('/privacy-policy');
     else if (tabId === 'terms') navigate('/terms-and-conditions');
     else if (tabId === 'refund') navigate('/refund-policy');
+  };
+
+  const handleQuickJump = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -160;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.history.pushState(null, '', `#${id}`);
+    }
   };
 
   const tabs = [
@@ -66,34 +90,34 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
     { id: 'priv-6', label: '6. Retention' },
     { id: 'priv-7', label: '7. Your Rights' },
     { id: 'priv-8', label: '8. Security' },
-    { id: 'priv-9', label: '9. Children\'s Data' },
-    { id: 'priv-10', label: '10. Cookies' },
-    { id: 'priv-11', label: '11. Anti-Fraud' },
-    { id: 'priv-12', label: '12. Grievance Redressal' },
-    { id: 'priv-13', label: '13. Changes' },
-    { id: 'priv-14', label: '14. Contact' },
+    { id: 'priv-9', label: '9. Cookies & Analytics' },
+    { id: 'priv-10', label: '10. Third-Party Links' },
+    { id: 'priv-11', label: '11. Children\'s Data' },
+    { id: 'priv-12', label: '12. Changes to Policy' },
+    { id: 'priv-13', label: '13. Grievance Officer' },
+    { id: 'priv-14', label: '14. Contact Us' },
   ];
 
   const termsSections = [
-    { id: 'term-1', label: '1. Disclaimer & Solicitation' },
-    { id: 'term-2', label: '2. Scope of Website' },
-    { id: 'term-3', label: '3. No Attorney-Client Privilege' },
-    { id: 'term-4', label: '4. Non-Provision of Regulated Services' },
-    { id: 'term-5', label: '5. IP & Corporate Practice' },
-    { id: 'term-6', label: '6. Conflict of Interest' },
-    { id: 'term-7', label: '7. Refusal / Discontinuance' },
-    { id: 'term-8', label: '8. Client Obligations & KYC' },
-    { id: 'term-9', label: '9. Professional Fees & Taxes' },
-    { id: 'term-10', label: '10. Third-Party Costs' },
-    { id: 'term-11', label: '11. Limitation of Liability' },
-    { id: 'term-12', label: '12. Indemnity' },
-    { id: 'term-13', label: '13. Intellectual Property' },
-    { id: 'term-14', label: '14. Confidentiality' },
-    { id: 'term-15', label: '15. Termination' },
-    { id: 'term-16', label: '16. Governing Law & Jurisdiction' },
-    { id: 'term-17', label: '17. Amendments' },
-    { id: 'term-18', label: '18. Grievance & Complaints' },
-    { id: 'term-19', label: '19. Entire Agreement' },
+    { id: 'term-1', label: '1. Disclaimer & No Solicitation' },
+    { id: 'term-2', label: '2. No Professional Relationship' },
+    { id: 'term-3', label: '3. Accuracy of Content' },
+    { id: 'term-4', label: '4. Scope of Services' },
+    { id: 'term-5', label: '5. No Guarantee of Outcome' },
+    { id: 'term-6', label: '6. Your Responsibilities' },
+    { id: 'term-7', label: '7. Client ID & Right to Decline' },
+    { id: 'term-8', label: '8. Fees & Statutory Charges' },
+    { id: 'term-9', label: '9. Limitation of Liability' },
+    { id: 'term-10', label: '10. Confidentiality' },
+    { id: 'term-11', label: '11. Communications' },
+    { id: 'term-12', label: '12. Intellectual Property' },
+    { id: 'term-13', label: '13. Acceptable Use' },
+    { id: 'term-14', label: '14. Third-Party Links' },
+    { id: 'term-15', label: '15. Force Majeure' },
+    { id: 'term-16', label: '16. Amendment' },
+    { id: 'term-17', label: '17. Severability & Waiver' },
+    { id: 'term-18', label: '18. Governing Law & Jurisdiction' },
+    { id: 'term-19', label: '19. Official Contact Details' },
   ];
 
   const refundSections = [
@@ -190,9 +214,14 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
 
               {/* Exact Bar Council Entry Text */}
               <div className="border-l-4 border-[#0B4619] dark:border-yellow-400 pl-6 py-2 space-y-4">
-                <h2 className="font-display font-black text-2xl text-slate-900 dark:text-white">
-                  ENTRY DISCLAIMER &amp; DECLARATION
-                </h2>
+                <div className="space-y-1">
+                  <span className="inline-block px-3 py-1 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-900 dark:text-amber-300 font-black text-xs tracking-wider uppercase">
+                    DISCLAIMER
+                  </span>
+                  <h2 className="font-display font-black text-2xl text-slate-900 dark:text-white pt-1">
+                    Terms of Use &amp; Engagement (Bar Council)
+                  </h2>
+                </div>
                 <p className="text-base leading-relaxed text-slate-800 dark:text-slate-200 font-medium">
                   The Bar Council of India does not permit advertisement or solicitation by advocates in any form or manner. By accessing this website, <strong>www.shivoham.biz</strong>, you acknowledge and confirm that you are seeking information relating to <strong>Shivoham &amp; Associates</strong> of your own accord and that there has been no form of solicitation, advertisement or inducement by Shivoham &amp; Associates or its members.
                 </p>
@@ -238,7 +267,7 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
               <div className="pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-                  Flignite, Ground Floor, Parasmani Commercial Complex, Dadar East, Mumbai – 400014
+                  Flignite, Ground Floor, Parasmani Commercial Complex, Dadar, Mumbai – 400014
                 </span>
                 <a href="mailto:diptish@shivoham.biz" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
                   diptish@shivoham.biz
@@ -261,7 +290,8 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                 <a
                   key={sec.id}
                   href={`#${sec.id}`}
-                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-emerald-500/15 hover:text-emerald-700 dark:hover:text-emerald-400 transition"
+                  onClick={(e) => handleQuickJump(e, sec.id)}
+                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-emerald-500/15 hover:text-emerald-700 dark:hover:text-emerald-400 transition cursor-pointer"
                 >
                   {sec.label}
                 </a>
@@ -272,9 +302,12 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
               
               {/* Header Metadata */}
               <div className="border-b border-slate-200 dark:border-slate-800 pb-8 space-y-4">
-                <div className="flex flex-wrap items-center gap-3 text-xs font-semibold">
-                  <span className="px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
-                    DPDP Act, 2023 &amp; IT Act, 2000 Compliant
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-semibold">
+                  <span className="px-3.5 py-1.5 rounded-full bg-[#052E1F] text-yellow-300 font-bold border border-yellow-500/30">
+                    Shivoham &amp; Associates &bull; PRIVACY POLICY
+                  </span>
+                  <span className="px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-medium">
+                    Effective from: 01.09.2026 &bull; Last updated: 10.09.2026
                   </span>
                 </div>
                 <h2 className="font-display font-black text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight">
@@ -294,15 +327,20 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                   1. Who we are
                 </h2>
                 <p>
-                  Shivoham &amp; Associates ("we", "us", "the Firm") is a professional services firm with its office at Flignite, Ground Floor, Parasmani Commercial Complex, Dadar East, Mumbai – 400014. Maharashtra. We provide intellectual property, business incorporation, licensing and regulatory advisory services.
+                  Shivoham &amp; Associates ("we", "us", "the Firm") is a professional services firm with its office at Flignite, Ground Floor, Parasmani Commercial Complex, Dadar, Mumbai – 400014. Maharashtra. We provide intellectual property, business incorporation, licensing and regulatory advisory services. Contact for privacy inquiries: <a href="mailto:diptish@shivoham.biz" className="text-emerald-700 dark:text-emerald-400 font-bold underline">diptish@shivoham.biz</a>.
                 </p>
                 <p>
                   This Policy explains how we collect, use, share, retain and protect personal data when you visit this website, submit an enquiry, or engage us for professional services. It is issued in accordance with the Digital Personal Data Protection Act, 2023 and the rules made under it, and with the Information Technology Act, 2000 and the rules made under it.
                 </p>
                 <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-950 dark:text-emerald-200 text-sm font-medium flex items-start gap-3">
                   <Info className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <div>
-                    For the purposes of the Digital Personal Data Protection Act, 2023, we act as a <strong>Data Fiduciary</strong> in respect of the personal data described below, and you are the <strong>Data Principal</strong>.
+                  <div className="space-y-1">
+                    <div>
+                      For the purposes of the Digital Personal Data Protection Act, 2023, we act as a <strong>Data Fiduciary</strong> in respect of the personal data described below, and you are the <strong>Data Principal</strong>.
+                    </div>
+                    <div className="text-xs pt-1 border-t border-emerald-500/20 font-semibold">
+                      Privacy &amp; Data Inquiries: <a href="mailto:diptish@shivoham.biz" className="underline font-bold text-emerald-800 dark:text-emerald-300">diptish@shivoham.biz</a>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -656,7 +694,7 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                   <div className="flex items-start gap-2.5 text-white/80 text-xs sm:text-sm">
                     <MapPin className="w-4 h-4 text-yellow-300 shrink-0 mt-0.5" />
                     <span>
-                      Flignite, Ground Floor, Parasmani Commercial Complex, Dadar East, Mumbai – 400014. Maharashtra
+                      Flignite, Ground Floor, Parasmani Commercial Complex, Dadar, Mumbai – 400014. Maharashtra
                     </span>
                   </div>
 
@@ -700,7 +738,8 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                 <a
                   key={sec.id}
                   href={`#${sec.id}`}
-                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-yellow-400/20 hover:text-amber-800 dark:hover:text-yellow-300 transition"
+                  onClick={(e) => handleQuickJump(e, sec.id)}
+                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-yellow-400/20 hover:text-amber-800 dark:hover:text-yellow-300 transition cursor-pointer"
                 >
                   {sec.label}
                 </a>
@@ -1088,7 +1127,7 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                   <div className="flex items-start gap-2.5 text-white/90 text-xs sm:text-sm">
                     <MapPin className="w-4 h-4 text-yellow-300 shrink-0 mt-0.5" />
                     <span>
-                      Flignite, Ground Floor, Parasmani Commercial Complex, Dadar East, Mumbai – 400014. Maharashtra
+                      Flignite, Ground Floor, Parasmani Commercial Complex, Dadar, Mumbai – 400014. Maharashtra
                     </span>
                   </div>
 
@@ -1128,7 +1167,8 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                 <a
                   key={sec.id}
                   href={`#${sec.id}`}
-                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-emerald-500/15 hover:text-emerald-700 dark:hover:text-emerald-400 transition"
+                  onClick={(e) => handleQuickJump(e, sec.id)}
+                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-emerald-500/15 hover:text-emerald-700 dark:hover:text-emerald-400 transition cursor-pointer"
                 >
                   {sec.label}
                 </a>
@@ -1401,7 +1441,7 @@ export default function Legal({ defaultTab = 'disclaimer' }) {
                       Shivoham &amp; Associates
                     </p>
                     <p className="text-white/80 text-xs sm:text-sm">
-                      Flignite, Ground Floor, Parasmani Commercial Complex, Dadar East, Mumbai – 400014. Maharashtra
+                      Flignite, Ground Floor, Parasmani Commercial Complex, Dadar, Mumbai – 400014. Maharashtra
                     </p>
                   </div>
 

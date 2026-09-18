@@ -11,6 +11,11 @@ import {
   MessageSquare,
   Zap,
   Sparkles,
+  Layers,
+  MessageSquareText,
+  ShieldCheck,
+  CalendarClock,
+  Compass,
 } from "lucide-react";
 import { categories } from "../data/servicesData";
 import api from "../config/api";
@@ -95,20 +100,31 @@ export default function Home() {
 
   const [stats, setStats] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [partnerLogos, setPartnerLogos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch dynamic data
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [statsRes, testimonialsRes] = await Promise.all([
+        const [statsRes, testimonialsRes, partnerLogosRes] = await Promise.all([
           api.get("/stats"),
           api.get("/testimonials"),
+          api.get("/partner-logos"),
         ]);
-        setStats(statsRes.data.data);
-        setTestimonials(testimonialsRes.data.data);
+        setStats(statsRes.data.data || []);
+        setTestimonials(testimonialsRes.data.data || []);
+        const fetchedLogos = (partnerLogosRes.data?.data || [])
+          .map((item) => (typeof item === "string" ? item : item.image))
+          .filter(Boolean);
+        if (fetchedLogos.length > 0) {
+          setPartnerLogos(fetchedLogos);
+        } else {
+          setPartnerLogos(brands);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
+        setPartnerLogos(brands);
       } finally {
         setLoading(false);
       }
@@ -169,7 +185,7 @@ export default function Home() {
       {/* SEO Metadata & LegalService Schema */}
       <SEO
         title="Shivoham & Associates | Premium IPR & Legal Advisory Services in Dadar, Mumbai"
-        description="India's trusted legal and IPR consultancy firm in Dadar East, Mumbai. Expert Trademark, Copyright, Patent, Industrial Design, Company Incorporation, and GST filing services."
+        description="India's trusted legal and IPR consultancy firm in Dadar, Mumbai. Expert Trademark, Copyright, Patent, Industrial Design, Company Incorporation, and GST filing services."
         canonicalUrl="https://shivoham.biz"
         schemas={{
           '@type': 'LegalService',
@@ -183,7 +199,7 @@ export default function Home() {
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'Ground Floor, Parasmani Commercial Complex, Flignite',
-            addressLocality: 'Dadar East, Mumbai',
+            addressLocality: 'Dadar, Mumbai',
             addressRegion: 'Maharashtra',
             postalCode: '400014',
             addressCountry: 'IN'
@@ -342,75 +358,134 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900 relative">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
-              Why Professionals Choose{" "}
-              <span className="bg-linear-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
-                Shivoham
+      {/* What We Commit To Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/50 dark:bg-slate-900/60 relative overflow-hidden border-y border-slate-100 dark:border-slate-800">
+        <div className="max-w-7xl mx-auto space-y-16">
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-widest">
+              <span>How We Work · What to Expect · Our Approach · Before You Engage Us</span>
+            </div>
+            <h2 className="font-display font-black text-3xl sm:text-5xl text-slate-900 dark:text-white tracking-tight">
+              What We{" "}
+              <span className="bg-linear-to-r from-emerald-600 via-teal-500 to-amber-500 bg-clip-text text-transparent">
+                Commit To
               </span>
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
-              Our firm bridges the gap between complex legal registries and
-              fast-moving business targets. We make processes simple and
-              accessible.
+            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed font-sans">
+              Our firm bridges the gap between complex legal registries and fast-moving business targets. Here is our straightforward promise to every client.
             </p>
-            <div className="space-y-4 pt-4">
-              {[
-                {
-                  title: "Proven Experts",
-                  desc: "Managed by senior corporate legal professionals.",
-                },
-                {
-                  title: "100% Transparent Fees",
-                  desc: "No hidden government filing cost surprises.",
-                },
-                {
-                  title: "Paperless Support",
-                  desc: "Upload materials online, track progress directly.",
-                },
-                {
-                  title: "Constant Assistance",
-                  desc: "24/7 client updates for critical legal dates.",
-                },
-              ].map((f, i) => (
-                <div key={i} className="flex items-start space-x-3">
-                  <CheckCircle2 className="w-6 h-6 text-primary-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white">
-                      {f.title}
-                    </h4>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 font-sans">
-                      {f.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="p-6 bg-slate-50 dark:bg-slate-800/40 rounded-3xl space-y-4">
-              <Zap className="w-8 h-8 text-primary-500" />
-              <h4 className="font-bold text-slate-900 dark:text-white">
-                Same-Day Filing
-              </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                Trademark filing and basic license applications initiated within
-                hours of documents sign-off.
-              </p>
-            </div>
-            <div className="p-6 bg-slate-50 dark:bg-slate-800/40 rounded-3xl space-y-4 mt-8">
-              <Star className="w-8 h-8 text-primary-500" />
-              <h4 className="font-bold text-slate-900 dark:text-white">
-                High Success Rate
-              </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                10,000+ trademark applications defended successfully against
-                objections.
-              </p>
-            </div>
+
+          {/* 2-Column Side-by-Side Cards (Opposite Pairs) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {/* Pair 1 - Left */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="p-8 bg-white dark:bg-slate-800/80 rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xs hover:shadow-xl hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 dark:bg-emerald-400/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white tracking-tight">
+                  One office for the whole stack.
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                  IPR, incorporation, licenses and contracts. Most businesses need more than one, and they interact.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Pair 1 - Right */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="p-8 bg-white dark:bg-slate-800/80 rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xs hover:shadow-xl hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center text-teal-600 dark:text-teal-400">
+                  <MessageSquareText className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white tracking-tight">
+                  Plain language, and reasoning behind it.
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                  Simple, clear and business friendly solutions
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Pair 2 - Left */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="p-8 bg-white dark:bg-slate-800/80 rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xs hover:shadow-xl hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 dark:bg-amber-400/10 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                  <CheckCircle2 className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white tracking-tight">
+                  We tell you what you need
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                  A trademark won't protect your product design. A company name isn't a brand right. Copyright won't protect an idea.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Pair 2 - Right */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="p-8 bg-white dark:bg-slate-800/80 rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xs hover:shadow-xl hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 dark:bg-blue-400/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white tracking-tight">
+                  We'll tell you if you don't need it
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                  ISO isn't mandatory. Most software isn't patentable. Not every business needs GST.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Pair 3 - Left */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="p-8 bg-white dark:bg-slate-800/80 rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xs hover:shadow-xl hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 dark:bg-indigo-400/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                  <CalendarClock className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white tracking-tight">
+                  Your deadlines, tracked.
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                  Trademarks renew at 10 years. FSSAI licenses expire. An IEC must be confirmed every April to June. LLP forms run at ₹100 a day with no ceiling.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Pair 3 - Right */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="p-8 bg-white dark:bg-slate-800/80 rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xs hover:shadow-xl hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 dark:bg-purple-400/10 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                  <Compass className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white tracking-tight">
+                  You'll always know which stage you're at.
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                  And what the next one is, with the date it's due.
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -455,20 +530,28 @@ export default function Home() {
 
             {/* moving row */}
             <div className="flex items-center gap-16 w-max animate-[marquee_22s_linear_infinite]">
-              {[...brands, ...brands].map((brand, index) => (
-                <div
-                  key={index}
-                  className="group flex items-center justify-center px-4"
-                >
-                  <img
-                    src={brand}
-                    alt="brand"
-                    className="h-12 sm:h-16 object-contain opacity-80 
-                           group-hover:opacity-100 
-                         transition-all duration-500 cursor-pointer hover:scale-110 drop-shadow-sm group-hover:drop-shadow-md"
-                  />
-                </div>
-              ))}
+              {(() => {
+                const logoList = partnerLogos.length > 0 ? partnerLogos : brands;
+                const formatPath = (src) => {
+                  if (!src) return "";
+                  if (src.startsWith("http://") || src.startsWith("https://") || src.startsWith("/")) return src;
+                  return `/${src}`;
+                };
+                return [...logoList, ...logoList].map((brand, index) => (
+                  <div
+                    key={index}
+                    className="group flex items-center justify-center px-4"
+                  >
+                    <img
+                      src={formatPath(brand)}
+                      alt="brand logo"
+                      className="h-12 sm:h-16 object-contain opacity-80 
+                             group-hover:opacity-100 
+                           transition-all duration-500 cursor-pointer hover:scale-110 drop-shadow-sm group-hover:drop-shadow-md"
+                    />
+                  </div>
+                ));
+              })()}
             </div>
           </div>
         </div>

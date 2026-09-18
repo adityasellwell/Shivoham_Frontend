@@ -148,7 +148,7 @@ export default function ServiceDetail() {
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Ground Floor, Parasmani Commercial Complex, Flignite',
-        addressLocality: 'Dadar East, Mumbai',
+        addressLocality: 'Dadar, Mumbai',
         addressRegion: 'Maharashtra',
         postalCode: '400014',
         addressCountry: 'IN'
@@ -205,7 +205,7 @@ export default function ServiceDetail() {
       {/* SEO Metadata & Schemas */}
       <SEO
         title={pageTitle}
-        description={`${service.shortDescription} Expert advisory, transparent government fees, and fast online filing by Shivoham & Associates in Dadar East, Mumbai.`}
+        description={`${service.shortDescription} Expert advisory, transparent government fees, and fast online filing by Shivoham & Associates in Dadar, Mumbai – 400014.`}
         canonicalUrl={canonicalUrl}
         schemas={schemas}
       />
@@ -544,14 +544,25 @@ export default function ServiceDetail() {
 
                   {service.sayPlainlyNotice && (
                     <div className="pt-6 border-t border-slate-100 dark:border-slate-800/80 space-y-3">
-                      <div className="p-5 sm:p-6 rounded-2xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-300/80 dark:border-amber-700/60 shadow-sm space-y-2">
-                        <h4 className="font-display font-bold text-base sm:text-lg text-amber-900 dark:text-amber-200 flex items-center gap-2">
-                          <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0" />
-                          {service.sayPlainlyNotice.title || 'Say this plainly on the page:'}
-                        </h4>
-                        <p className="text-slate-800 dark:text-slate-200 leading-relaxed font-sans text-sm sm:text-base font-medium">
-                          {service.sayPlainlyNotice.text}
-                        </p>
+                      <div className="p-5 sm:p-6 rounded-2xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-300/80 dark:border-amber-700/60 shadow-sm">
+                        {service.sayPlainlyNotice.title ? (
+                          <div className="space-y-2">
+                            <h4 className="font-display font-bold text-base sm:text-lg text-amber-900 dark:text-amber-200 flex items-center gap-2">
+                              <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0" />
+                              {service.sayPlainlyNotice.title}
+                            </h4>
+                            <p className="text-slate-800 dark:text-slate-200 leading-relaxed font-sans text-sm sm:text-base font-medium">
+                              {service.sayPlainlyNotice.text}
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="flex items-start gap-3">
+                            <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                            <p className="text-amber-950 dark:text-amber-200 leading-relaxed font-sans text-sm sm:text-base font-semibold">
+                              {service.sayPlainlyNotice.text}
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -867,9 +878,9 @@ export default function ServiceDetail() {
                   <p className="text-sm text-slate-500 dark:text-slate-400 font-sans">Prepare these files beforehand for a quick and paperless submission process:</p>
                   <div className="grid grid-cols-1 gap-3">
                     {service.documents.map((doc, dIdx) => (
-                      <div key={dIdx} className="flex items-center space-x-3.5 p-3.5 bg-primary-50/20 dark:bg-slate-800/25 border border-primary-100/30 dark:border-slate-700/30 rounded-xl">
-                        <span className="w-6 h-6 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 flex items-center justify-center font-bold text-xs">{dIdx + 1}</span>
-                        <span className="text-slate-700 dark:text-slate-300 font-sans text-sm font-semibold">{doc}</span>
+                      <div key={dIdx} className="flex items-start space-x-3.5 p-3.5 bg-primary-50/20 dark:bg-slate-800/25 border border-primary-100/30 dark:border-slate-700/30 rounded-xl">
+                        <span className="w-6 h-6 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">{dIdx + 1}</span>
+                        <span className="text-slate-700 dark:text-slate-300 font-sans text-sm font-semibold leading-relaxed">{doc}</span>
                       </div>
                     ))}
                   </div>

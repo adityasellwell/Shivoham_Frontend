@@ -19,6 +19,7 @@ import SearchResults from './pages/SearchResults';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminFAQ from './pages/admin/AdminFAQ';
 import AdminQuoteConfig from './pages/admin/AdminQuoteConfig';
+import AdminPartnerLogos from './pages/admin/AdminPartnerLogos';
 import Legal from './pages/Legal';
 import WhichIPProtection from './pages/WhichIPProtection';
 import WhichBusinessStructure from './pages/WhichBusinessStructure';
@@ -197,6 +198,7 @@ export default function App() {
             <Route path="consultations" element={<AdminConsultations />} />
             <Route path="faqs" element={<AdminFAQ />} />
             <Route path="quote-config" element={<AdminQuoteConfig />} />
+            <Route path="partner-logos" element={<AdminPartnerLogos />} />
           </Route>
 
           {/* Legacy PHP page redirect routes */}

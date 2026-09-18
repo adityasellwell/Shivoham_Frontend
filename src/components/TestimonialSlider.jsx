@@ -37,6 +37,7 @@ export default function TestimonialSlider({ testimonials: propTestimonials, titl
   const [testimonials, setTestimonials] = useState(propTestimonials || []);
   const [current, setCurrent] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
+  const [imgError, setImgError] = useState(false);
 
   // If testimonials not passed as prop, fetch from backend
   useEffect(() => {
@@ -66,6 +67,10 @@ export default function TestimonialSlider({ testimonials: propTestimonials, titl
   const list = testimonials.length > 0 ? testimonials : DEFAULT_TESTIMONIALS;
 
   useEffect(() => {
+    setImgError(false);
+  }, [current, list]);
+
+  useEffect(() => {
     if (!autoplay || list.length <= 1) return;
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % list.length);
@@ -84,9 +89,42 @@ export default function TestimonialSlider({ testimonials: propTestimonials, titl
   };
 
   const active = list[current] || list[0];
-  const authorName = active?.name || active?.author || 'Verified Client';
+  const rawName = active?.name || active?.author || 'Verified Client';
+  const authorName = rawName.trim();
   const roleText = [active?.designation, active?.company].filter(Boolean).join(', ') || active?.role || 'Corporate Client';
   const starCount = active?.rating || 5;
+
+  const getImageUrl = (url) => {
+    if (!url || typeof url !== 'string') return null;
+    const trimmed = url.trim();
+    if (!trimmed) return null;
+
+    // Filter out Google Maps webpage URLs (e.g. contrib links that are not direct images)
+    if (trimmed.includes('google.com/maps') || trimmed.includes('/contrib/')) {
+      return null;
+    }
+
+    // Only allow direct valid image URLs
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('data:')) {
+      return trimmed;
+    }
+
+    if (trimmed.startsWith('/img/') || trimmed.startsWith('img/')) {
+      return trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+    }
+
+    return null;
+  };
+
+  const activeImageUrl = getImageUrl(active?.image);
+
+  const getInitials = (name) => {
+    if (!name || typeof name !== 'string') return 'VC';
+    const parts = name.trim().split(/\s+/).filter(Boolean);
+    if (parts.length === 0) return 'VC';
+    if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  };
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50/70 dark:bg-slate-950/30 transition-colors">
@@ -139,15 +177,16 @@ export default function TestimonialSlider({ testimonials: propTestimonials, titl
 
                 {/* Author Info & Avatar */}
                 <div className="flex items-center justify-center space-x-3 pt-2">
-                  {active?.image ? (
+                  {activeImageUrl && !imgError ? (
                     <img
-                      src={active.image}
+                      src={activeImageUrl}
                       alt={authorName}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-amber-500/30 shadow-xs"
+                      onError={() => setImgError(true)}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-amber-500/30 shadow-xs shrink-0"
                     />
                   ) : (
-                    <div className="w-11 h-11 rounded-full bg-linear-to-br from-amber-500 to-amber-700 text-white font-bold flex items-center justify-center text-sm shadow-xs">
-                      {authorName.charAt(0).toUpperCase()}
+                    <div className="w-12 h-12 rounded-full bg-linear-to-br from-amber-500 to-amber-700 text-white font-bold flex items-center justify-center text-sm shadow-xs border-2 border-amber-500/30 shrink-0 select-none">
+                      {getInitials(authorName)}
                     </div>
                   )}
 

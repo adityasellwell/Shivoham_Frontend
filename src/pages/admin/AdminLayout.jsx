@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Outlet, useLocation, Navigate } from "react-router-dom";
-import { LayoutDashboard, BarChart3, MessageSquare, LogOut, Menu, X, HelpCircle, Settings } from "lucide-react";
+import { LayoutDashboard, BarChart3, MessageSquare, LogOut, Menu, X, HelpCircle, Settings, Image as ImageIcon } from "lucide-react";
 
 export default function AdminLayout() {
    const token = localStorage.getItem("adminToken");
@@ -14,6 +14,7 @@ export default function AdminLayout() {
   const navigation = [
     { name: "Stats", href: "/admin/stats", icon: BarChart3 },
     { name: "Testimonials", href: "/admin/testimonials", icon: MessageSquare },
+    { name: "Partner Logos", href: "/admin/partner-logos", icon: ImageIcon },
     { name: "Quotes", href: "/admin/quotes", icon: LayoutDashboard },
     { name: "Consultations", href: "/admin/consultations", icon: MessageSquare },
     { name: "FAQs", href: "/admin/faqs", icon: HelpCircle },

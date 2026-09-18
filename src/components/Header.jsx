@@ -121,7 +121,7 @@ export default function Header() {
             </span>
           </div>
           <div className="text-slate-400 sm:text-slate-300 text-center sm:text-right">
-            Dadar East, Mumbai 400014 • India's Leading Professional Services Platform
+            Dadar, Mumbai – 400014 • India's Leading Professional Services Platform
           </div>
         </div>
       </div>

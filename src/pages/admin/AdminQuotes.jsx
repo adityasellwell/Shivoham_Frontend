@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import api from "../../config/api";
 import { Trash2, Loader2, FileText, CheckCircle2, Clock, PhoneCall } from "lucide-react";
+import ConfirmModal from "../../components/ConfirmModal";
 
 export default function AdminQuotes() {
   const [quotes, setQuotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [quoteToDelete, setQuoteToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchQuotes = async () => {
     try {
@@ -30,13 +33,21 @@ export default function AdminQuotes() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this quote request?")) return;
+  const handleDeleteClick = (quote) => {
+    setQuoteToDelete(quote);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!quoteToDelete) return;
+    setIsDeleting(true);
     try {
-      await api.delete(`/admin/quotes/${id}`);
+      await api.delete(`/admin/quotes/${quoteToDelete.id}`);
       fetchQuotes();
     } catch (error) {
       console.error("Error deleting quote", error);
+    } finally {
+      setIsDeleting(false);
+      setQuoteToDelete(null);
     }
   };
 
@@ -193,7 +204,7 @@ export default function AdminQuotes() {
                           <option value="completed">Completed</option>
                         </select>
                         <button
-                          onClick={() => handleDelete(quote.id)}
+                          onClick={() => handleDeleteClick(quote)}
                           title="Delete Request"
                           className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition cursor-pointer"
                         >
@@ -208,6 +219,17 @@ export default function AdminQuotes() {
           </table>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(quoteToDelete)}
+        onClose={() => setQuoteToDelete(null)}
+        onConfirm={handleConfirmDelete}
+        title="Delete Quote Request"
+        message="Are you sure you want to delete this quote request? This action cannot be undone."
+        confirmText="Delete Quote"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

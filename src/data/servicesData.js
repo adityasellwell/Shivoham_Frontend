@@ -740,7 +740,7 @@ export const services = {
     faqs: [
       {
         q: 'Who is a nominee, and what do they actually do?',
-        a: 'The nominee is a person you name at incorporation who becomes the member of the OPC if you die or become incapacitated. They have no role, rights or say while you are running the company. Their written consent in Form INC-3 is required, and they can be changed later.'
+        a: 'An OPC nominee is the person whose name is mentioned in the Memorandum with prior written consent, and who becomes the member of the OPC upon the death or incapacity to contract of the sole member/subscriber. The nominee\'s consent is required to be filed with the Registrar at incorporation.'
       },
       {
         q: 'Do I still have to convert to a Private Limited Company after crossing a turnover limit?',
@@ -1543,7 +1543,6 @@ export const services = {
     heroLine: 'Internationally recognised management system standards, awarded by an accredited certification body after audit.',
     fullDescription: 'Internationally recognised management system standards, awarded by an accredited certification body after audit. ISO standards certify that an enterprise maintains audited, verified operational workflows across quality management, information security, or occupational safety.',
     sayPlainlyNotice: {
-      title: 'Say this plainly on the page:',
       text: 'ISO certification is voluntary. No law requires it. It is a commercial credential, not a licence. Being honest about that will earn you more trust than implying otherwise.'
     },
     commonStandards: {

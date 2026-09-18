@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import api from "../../config/api";
 import { Edit2, Trash2, Plus, X, Loader2 } from "lucide-react";
 import QuoteIcon, { ICON_OPTIONS } from "../../components/QuoteIcon";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const EMPTY_CAT = {
   keyId: "",
@@ -30,6 +31,10 @@ export default function AdminQuoteConfig() {
   const [services, setServices] = useState([]);
   const [turnovers, setTurnovers] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Confirm Modal state
+  const [confirmConfig, setConfirmConfig] = useState({ isOpen: false, title: "", message: "", onConfirm: null });
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Category Form State
   const [catForm, setCatForm] = useState(EMPTY_CAT);
@@ -138,14 +143,24 @@ export default function AdminQuoteConfig() {
     }
   };
 
-  const handleCatDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this category and all its filing services?")) return;
-    try {
-      await api.delete(`/admin/quote-config/categories/${id}`);
-      fetchAll();
-    } catch (err) {
-      console.error(err);
-    }
+  const handleCatDelete = (id) => {
+    setConfirmConfig({
+      isOpen: true,
+      title: "Delete Category",
+      message: "Are you sure you want to delete this category and all its filing services? This action cannot be undone.",
+      onConfirm: async () => {
+        setIsDeleting(true);
+        try {
+          await api.delete(`/admin/quote-config/categories/${id}`);
+          fetchAll();
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsDeleting(false);
+          setConfirmConfig((prev) => ({ ...prev, isOpen: false }));
+        }
+      },
+    });
   };
 
   /* ============================================================
@@ -175,14 +190,24 @@ export default function AdminQuoteConfig() {
     }
   };
 
-  const handleSvcDelete = async (id, title) => {
-    if (!window.confirm(`Remove "${title}" from checklist?`)) return;
-    try {
-      await api.delete(`/admin/quote-config/services/${id}`);
-      fetchAll();
-    } catch (err) {
-      console.error(err);
-    }
+  const handleSvcDelete = (id, title) => {
+    setConfirmConfig({
+      isOpen: true,
+      title: "Remove Service",
+      message: `Are you sure you want to remove "${title}" from the checklist?`,
+      onConfirm: async () => {
+        setIsDeleting(true);
+        try {
+          await api.delete(`/admin/quote-config/services/${id}`);
+          fetchAll();
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsDeleting(false);
+          setConfirmConfig((prev) => ({ ...prev, isOpen: false }));
+        }
+      },
+    });
   };
 
   const activeStep2Category = categories.find((c) => String(c.id) === String(selectedStep2CatId));
@@ -242,14 +267,24 @@ export default function AdminQuoteConfig() {
     }
   };
 
-  const handleTurnoverDelete = async (id, label) => {
-    if (!window.confirm(`Delete turnover bracket "${label}"?`)) return;
-    try {
-      await api.delete(`/admin/quote-config/turnovers/${id}`);
-      fetchAll();
-    } catch (err) {
-      console.error(err);
-    }
+  const handleTurnoverDelete = (id, label) => {
+    setConfirmConfig({
+      isOpen: true,
+      title: "Delete Turnover Option",
+      message: `Are you sure you want to delete turnover bracket "${label}"?`,
+      onConfirm: async () => {
+        setIsDeleting(true);
+        try {
+          await api.delete(`/admin/quote-config/turnovers/${id}`);
+          fetchAll();
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsDeleting(false);
+          setConfirmConfig((prev) => ({ ...prev, isOpen: false }));
+        }
+      },
+    });
   };
 
   return (
@@ -812,6 +847,17 @@ export default function AdminQuoteConfig() {
           </div>
         </>
       )}
+
+      {/* Confirmation Modal */}
+      <ConfirmModal
+        isOpen={confirmConfig.isOpen}
+        onClose={() => setConfirmConfig((prev) => ({ ...prev, isOpen: false }))}
+        onConfirm={confirmConfig.onConfirm}
+        title={confirmConfig.title}
+        message={confirmConfig.message}
+        confirmText="Delete"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

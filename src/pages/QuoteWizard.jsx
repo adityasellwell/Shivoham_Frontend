@@ -108,20 +108,33 @@ export default function QuoteWizard() {
     e.preventDefault();
     setSubmitting(true);
     try {
+      // Find category title or key name
+      const catObj = categories.find(
+        c => String(c.id) === String(selectedCategory) || c.keyId === selectedCategory
+      );
+      const categoryName = catObj ? catObj.title : String(selectedCategory || 'General');
+
+      // Map selected service IDs to human-readable titles
+      const serviceTitles = selectedServices.map(svcId => {
+        const found = allServices.find(s => String(s.id) === String(svcId));
+        return found ? found.title : String(svcId);
+      });
+
       await api.post('/quotes', {
-        category: selectedCategory,
-        services: selectedServices,
-        businessName: businessDetails.name,
-        businessDesc: businessDetails.description,
-        turnover: isIPR ? 'N/A' : businessDetails.turnover,
-        contactName: contactInfo.name,
-        contactEmail: contactInfo.email,
-        contactPhone: contactInfo.phone
+        category: categoryName,
+        services: serviceTitles,
+        businessName: businessDetails.name || '',
+        businessDesc: businessDetails.description || '',
+        turnover: isIPR ? 'N/A' : (businessDetails.turnover || 'N/A'),
+        contactName: contactInfo.name || '',
+        contactEmail: contactInfo.email || '',
+        contactPhone: contactInfo.phone || ''
       });
       setSubmitted(true);
     } catch (error) {
       console.error('Error submitting quote', error);
-      alert('Failed to submit quote request. Please try again.');
+      const errMsg = error.response?.data?.message || 'Failed to submit quote request. Please try again.';
+      alert(errMsg);
     } finally {
       setSubmitting(false);
     }

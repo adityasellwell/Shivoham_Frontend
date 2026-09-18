@@ -144,7 +144,7 @@ export default function About() {
       {/* SEO Metadata */}
       <SEO
         title="About Us | Legal & IPR Experts in Dadar, Mumbai | Shivoham & Associates"
-        description="Learn about Shivoham & Associates, a premier legal consultancy in Dadar East, Mumbai specializing in Intellectual Property, corporate governance, and statutory compliance."
+        description="Learn about Shivoham & Associates, a premier legal consultancy in Dadar, Mumbai specializing in Intellectual Property, corporate governance, and statutory compliance."
         canonicalUrl="https://shivoham.biz/about"
       />
 
@@ -495,7 +495,7 @@ export default function About() {
 
             <div className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
               <div className="text-sm text-slate-600 dark:text-slate-300 font-medium">
-                Ground Floor, Shivoham & Associates, Parasmani Commercial Complex, Flignite, Dadar East, Mumbai, Maharashtra 400014
+                Ground Floor, Shivoham & Associates, Parasmani Commercial Complex, Flignite, Dadar, Mumbai – 400014
               </div>
               <a
                 href="https://www.google.com/maps/place/SHIVOHAM+AND+ASSOCIATES/@19.015854,72.8437095,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7cf1ed58c1157:0xd909cce553d3833f!8m2!3d19.015854!4d72.8437095!16s%2Fg%2F11whfm7hz1?entry=ttu&g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D"

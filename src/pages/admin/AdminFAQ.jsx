@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import api from "../../config/api";
 import { Plus, Edit2, Trash2, Loader2, Download, Upload, FileSpreadsheet, CheckCircle2, AlertTriangle, X, Info, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const EMPTY_FORM = { category: "", question: "", answer: "", sortOrder: 0, isActive: true };
 
@@ -13,6 +14,8 @@ export default function AdminFAQ() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
+  const [faqToDelete, setFaqToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -82,13 +85,21 @@ export default function AdminFAQ() {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Delete this FAQ?")) return;
+  const handleDeleteClick = (faq) => {
+    setFaqToDelete(faq);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!faqToDelete) return;
+    setIsDeleting(true);
     try {
-      await api.delete(`/admin/faqs/${id}`);
+      await api.delete(`/admin/faqs/${faqToDelete.id}`);
       fetchFaqs();
     } catch (error) {
       console.error("Error deleting FAQ", error);
+    } finally {
+      setIsDeleting(false);
+      setFaqToDelete(null);
     }
   };
 
@@ -625,7 +636,7 @@ export default function AdminFAQ() {
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
-                          onClick={() => handleDelete(faq.id)}
+                          onClick={() => handleDeleteClick(faq)}
                           title="Delete FAQ"
                           className="w-8 h-8 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 flex items-center justify-center transition cursor-pointer"
                         >
@@ -831,6 +842,17 @@ export default function AdminFAQ() {
           </div>
         </div>
       )}
+
+      {/* Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(faqToDelete)}
+        onClose={() => setFaqToDelete(null)}
+        onConfirm={handleConfirmDelete}
+        title="Delete FAQ"
+        message="Are you sure you want to delete this FAQ entry? This action cannot be undone."
+        confirmText="Delete FAQ"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

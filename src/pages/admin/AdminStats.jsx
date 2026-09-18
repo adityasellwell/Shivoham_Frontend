@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import api from "../../config/api";
 import { Plus, Edit2, Trash2, Loader2, BarChart3 } from "lucide-react";
+import ConfirmModal from "../../components/ConfirmModal";
 
 export default function AdminStats() {
   const [stats, setStats] = useState([]);
@@ -8,6 +9,8 @@ export default function AdminStats() {
   const [formData, setFormData] = useState({ label: "", value: "", suffix: "+", sortOrder: 0, isActive: true });
   const [editingId, setEditingId] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [statToDelete, setStatToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const formRef = useRef(null);
 
   const fetchStats = async () => {
@@ -68,13 +71,21 @@ export default function AdminStats() {
     });
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this stat?")) return;
+  const handleDeleteClick = (stat) => {
+    setStatToDelete(stat);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!statToDelete) return;
+    setIsDeleting(true);
     try {
-      await api.delete(`/admin/stats/${id}`);
+      await api.delete(`/admin/stats/${statToDelete.id}`);
       fetchStats();
     } catch (error) {
       console.error("Error deleting stat", error);
+    } finally {
+      setIsDeleting(false);
+      setStatToDelete(null);
     }
   };
 
@@ -321,7 +332,7 @@ export default function AdminStats() {
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button
-                          onClick={() => handleDelete(stat.id)}
+                          onClick={() => handleDeleteClick(stat)}
                           title="Delete Stat"
                           className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition cursor-pointer"
                         >
@@ -336,6 +347,17 @@ export default function AdminStats() {
           </table>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(statToDelete)}
+        onClose={() => setStatToDelete(null)}
+        onConfirm={handleConfirmDelete}
+        title="Delete Stat"
+        message="Are you sure you want to delete this stat entry? This action cannot be undone."
+        confirmText="Delete Stat"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

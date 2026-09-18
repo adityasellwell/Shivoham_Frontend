@@ -22,7 +22,7 @@ const legalLinks = [
 const contactInfo = [
   {
     icon: MapPin,
-    text: "Ground Floor, Shivoham & Associates, Parasmani Commercial Complex, Flignite, Dadar East, Dadar, Mumbai, Maharashtra 400014",
+    text: "Ground Floor, Shivoham & Associates, Parasmani Commercial Complex, Flignite, Dadar, Mumbai – 400014",
     type: "map",
     link: "https://www.google.com/maps/place/SHIVOHAM+AND+ASSOCIATES/@19.015854,72.8437095,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7cf1ed58c1157:0xd909cce553d3833f!8m2!3d19.015854!4d72.8437095!16s%2Fg%2F11whfm7hz1?entry=ttu&g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D",
   },

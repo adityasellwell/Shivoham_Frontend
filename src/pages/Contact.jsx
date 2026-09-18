@@ -51,10 +51,10 @@ export default function Contact() {
   const contactCards = [
     {
       title: 'Our Office',
-      desc: 'Ground Floor, Shivoham & Associates, Parasmani Commercial Complex, Flignite, Dadar East, Dadar, Mumbai, Maharashtra 400014',
+      desc: 'Ground Floor, Shivoham & Associates, Parasmani Commercial Complex, Flignite, Dadar, Mumbai – 400014',
       icon: MapPin,
       actionLabel: 'Find on Maps',
-      link: 'https://maps.google.com/?q=Parasmani+Commercial+Complex+Dadar+East+Mumbai+400014'
+      link: 'https://maps.google.com/?q=Parasmani+Commercial+Complex+Dadar+Mumbai+400014'
     },
     {
       title: 'Call Us',
@@ -76,8 +76,8 @@ export default function Contact() {
     <div className="font-sans bg-slate-50 dark:bg-slate-950/20 transition-all">
       {/* SEO Metadata & ContactPage Schema */}
       <SEO
-        title="Contact Us | Legal Advisors in Dadar East, Mumbai | Shivoham & Associates"
-        description="Schedule a legal consultation or drop an inquiry with Shivoham & Associates at Dadar East, Mumbai. Phone: +91 9137282042 | Email: diptish@shivoham.biz"
+        title="Contact Us | Legal Advisors in Dadar, Mumbai | Shivoham & Associates"
+        description="Schedule a legal consultation or drop an inquiry with Shivoham & Associates at Dadar, Mumbai. Phone: +91 9137282042 | Email: diptish@shivoham.biz"
         canonicalUrl="https://shivoham.biz/contact"
         schemas={{
           '@type': 'ContactPage',
@@ -92,7 +92,7 @@ export default function Contact() {
             address: {
               '@type': 'PostalAddress',
               streetAddress: 'Ground Floor, Parasmani Commercial Complex, Flignite',
-              addressLocality: 'Dadar East, Mumbai',
+              addressLocality: 'Dadar, Mumbai',
               addressRegion: 'Maharashtra',
               postalCode: '400014',
               addressCountry: 'IN'
@@ -107,7 +107,7 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <h1 className="font-display font-black text-4xl sm:text-5xl tracking-tight leading-tight text-[#0B4619]">Contact Our Advisers</h1>
           <p className="text-[#0B4619]/80 font-sans max-w-2xl mx-auto text-sm sm:text-base leading-relaxed font-medium">
-            Reach out to schedule a consulting slot, ask registration questions, or request case studies from our Dadar East, Mumbai office.
+            Reach out to schedule a consulting slot, ask registration questions, or request case studies from our Dadar, Mumbai office.
           </p>
         </div>
       </section>

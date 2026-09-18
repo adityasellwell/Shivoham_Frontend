@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import api from "../../config/api";
 import { Trash2, Loader2, MessageSquare, Clock, PhoneCall, CheckCircle2 } from "lucide-react";
+import ConfirmModal from "../../components/ConfirmModal";
 
 export default function AdminConsultations() {
   const [consultations, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [itemToDelete, setItemToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchConsultations = async () => {
     try {
@@ -30,13 +33,21 @@ export default function AdminConsultations() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this consultation request?")) return;
+  const handleDeleteClick = (item) => {
+    setItemToDelete(item);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!itemToDelete) return;
+    setIsDeleting(true);
     try {
-      await api.delete(`/admin/consultations/${id}`);
+      await api.delete(`/admin/consultations/${itemToDelete.id}`);
       fetchConsultations();
     } catch (error) {
       console.error("Error deleting consultation", error);
+    } finally {
+      setIsDeleting(false);
+      setItemToDelete(null);
     }
   };
 
@@ -174,7 +185,7 @@ export default function AdminConsultations() {
                           <option value="completed">Completed</option>
                         </select>
                         <button
-                          onClick={() => handleDelete(item.id)}
+                          onClick={() => handleDeleteClick(item)}
                           title="Delete Request"
                           className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition cursor-pointer"
                         >
@@ -189,6 +200,17 @@ export default function AdminConsultations() {
           </table>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(itemToDelete)}
+        onClose={() => setItemToDelete(null)}
+        onConfirm={handleConfirmDelete}
+        title="Delete Consultation Request"
+        message="Are you sure you want to delete this consultation request? This action cannot be undone."
+        confirmText="Delete Consultation"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }
