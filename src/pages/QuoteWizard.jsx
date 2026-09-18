@@ -7,17 +7,71 @@ import LegalTermsModal from '../components/LegalTermsModal';
 import api from '../config/api';
 import SEO from '../components/SEO';
 
+const DEFAULT_CATEGORIES = [
+  {
+    id: 1,
+    keyId: 'ipr',
+    title: 'Intellectual Property Rights (IPR)',
+    description: 'Protect your brand, inventions, creative works, and designs with our expert IP advisory and filing.',
+    icon: 'Shield',
+  },
+  {
+    id: 2,
+    keyId: 'incorporation',
+    title: 'Company Formation',
+    description: 'Incorporate your business legally with the right corporate structure for scaling and investor readiness.',
+    icon: 'Briefcase',
+  },
+  {
+    id: 3,
+    keyId: 'licenses',
+    title: 'Company Licenses & Compliance',
+    description: 'Ensure absolute compliance and smooth operations with mandatory business registrations and licenses.',
+    icon: 'FileCheck',
+  },
+];
+
+const DEFAULT_SERVICES = [
+  { id: 101, quoteCategoryId: 1, title: 'Trademark Registration' },
+  { id: 102, quoteCategoryId: 1, title: 'Copyright Registration' },
+  { id: 103, quoteCategoryId: 1, title: 'Patent Filing & Advisory' },
+  { id: 104, quoteCategoryId: 1, title: 'Industrial Design Protection' },
+  { id: 105, quoteCategoryId: 1, title: 'IPR Opposition & Rectification' },
+
+  { id: 201, quoteCategoryId: 2, title: 'Private Limited Company' },
+  { id: 202, quoteCategoryId: 2, title: 'Limited Liability Partnership (LLP)' },
+  { id: 203, quoteCategoryId: 2, title: 'One Person Company (OPC)' },
+  { id: 204, quoteCategoryId: 2, title: 'Partnership Firm' },
+  { id: 205, quoteCategoryId: 2, title: 'Sole Proprietorship' },
+  { id: 206, quoteCategoryId: 2, title: 'Section 8 / NGO / Trust' },
+
+  { id: 301, quoteCategoryId: 3, title: 'GST Registration & Returns' },
+  { id: 302, quoteCategoryId: 3, title: 'Shop & Establishment (Gumasta)' },
+  { id: 303, quoteCategoryId: 3, title: 'MSME / Udyam Registration' },
+  { id: 304, quoteCategoryId: 3, title: 'FSSAI Food License' },
+  { id: 305, quoteCategoryId: 3, title: 'Import Export Code (IEC)' },
+  { id: 306, quoteCategoryId: 3, title: 'Digital Signature Certificate (DSC)' },
+  { id: 307, quoteCategoryId: 3, title: 'ISO / CE / BIS Certifications' },
+];
+
+const DEFAULT_TURNOVERS = [
+  { id: 1, label: 'Less than ₹20 Lakhs' },
+  { id: 2, label: '₹20 Lakhs to ₹1 Crore' },
+  { id: 3, label: '₹1 Crore to ₹5 Crores' },
+  { id: 4, label: '₹5 Crores+' },
+];
+
 export default function QuoteWizard() {
   const [step, setStep] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedServices, setSelectedServices] = useState([]);
-  const [businessDetails, setBusinessDetails] = useState({ name: '', description: '', turnover: '' });
+  const [businessDetails, setBusinessDetails] = useState({ name: '', description: '', turnover: 'Less than ₹20 Lakhs' });
   const [contactInfo, setContactInfo] = useState({ name: '', email: '', phone: '' });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [allServices, setAllServices] = useState([]);
-  const [turnoverOptions, setTurnoverOptions] = useState([]);
+  const [categories, setCategories] = useState(DEFAULT_CATEGORIES);
+  const [allServices, setAllServices] = useState(DEFAULT_SERVICES);
+  const [turnoverOptions, setTurnoverOptions] = useState(DEFAULT_TURNOVERS);
 
   // Legal Modal & Contact Form Gating State
   const [legalModalOpen, setLegalModalOpen] = useState(false);
@@ -52,11 +106,10 @@ export default function QuoteWizard() {
         const svcs = svcRes.data?.data || [];
         const turns = turnRes.data?.data || [];
 
-        setCategories(cats);
-        setAllServices(svcs);
-        setTurnoverOptions(turns);
-
+        if (cats.length > 0) setCategories(cats);
+        if (svcs.length > 0) setAllServices(svcs);
         if (turns.length > 0) {
+          setTurnoverOptions(turns);
           setBusinessDetails(prev => ({ ...prev, turnover: prev.turnover || turns[0].label }));
         }
       } catch (err) {
